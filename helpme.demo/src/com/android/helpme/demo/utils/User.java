@@ -5,6 +5,8 @@ import org.json.simple.parser.JSONParser;
 
 import com.android.helpme.demo.utils.position.Position;
 import com.android.helpme.demo.utils.position.PositionInterface;
+import com.android.helpme.demo.utils.position.SimpleSelectionStrategy;
+import com.google.android.maps.GeoPoint;
 
 
 
@@ -14,19 +16,27 @@ import com.android.helpme.demo.utils.position.PositionInterface;
  *
  */
 public class User implements UserInterface {
+	public static final String NAME = "Name";
+	public static final String HELFER = "Helfer";
+	public static final String POSITION = "Position";
+	
+	public static final String ID = "id";
 	private String name;
+	private String id;
 	private Boolean helfer;
-	private PositionInterface position; 
+	private Position position; 
 
-	public User(String name, Boolean helfer) {
+	public User(String id,String name, Boolean helfer) {
 		this.name = name;
 		this.helfer = helfer;
+		this.id = id;
 	}
 
 	public User(JSONObject object) {
-		this.name = (String) object.get(ACCOUNT);
+		this.name = (String) object.get(NAME);
 		this.helfer = (Boolean) object.get(HELFER);
-		if (object.get(PositionInterface.POSITION) != null) {
+		this.id = (String) object.get(ID);
+		if (object.get(POSITION) != null) {
 			this.position = new Position(object);
 		}
 	}
@@ -51,7 +61,7 @@ public class User implements UserInterface {
 	 * @see com.android.helpme.demo.utils.UserInterface#getPosition()
 	 */
 	@Override
-	public PositionInterface getPosition() {
+	public Position getPosition() {
 		return position;
 	}
 
@@ -59,9 +69,16 @@ public class User implements UserInterface {
 	 * @see com.android.helpme.demo.utils.UserInterface#setPosition(com.android.helpme.demo.utils.position.Position)
 	 */
 	@Override
-	public void setPosition(PositionInterface position) {
+	public void setPosition(Position position) {
 		this.position = position;
 	}
+	
+	
+	
+	public String getId() {
+		return id;
+	}
+
 	
 	@Override
 	public String toString() {
@@ -69,7 +86,7 @@ public class User implements UserInterface {
 		if (helfer) {
 			string += "Helfer";
 		}else {
-			string += "Hilfe suchender";
+			string += "Hilfe Suchender";
 		}
 		string += (" : "+ name);
 		return string;
@@ -81,10 +98,27 @@ public class User implements UserInterface {
 	@Override
 	public JSONObject getJsonObject() {
 		JSONObject object = new JSONObject();
-		object.put(ACCOUNT, name);
+		object.put(NAME, name);
 		object.put(HELFER, helfer);
-		object.put(PositionInterface.POSITION, position);
+		object.put(POSITION, position);
+		object.put(ID, id);
 		return object;
+	}
+
+	@Override
+	public GeoPoint getGeoPoint() {
+		int latitude = (int)(getPosition().getLatitude() * 1e6);
+		int longitude = (int)(getPosition().getLongitude() * 1e6);
+		GeoPoint point = new GeoPoint(latitude,longitude);
+		return point;
+	}
+
+	@Override
+	public void updatePosition(Position position) {
+		if (SimpleSelectionStrategy.isPositionRelevant(getPosition(), position)) {
+			
+		}
+		
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.Set;
 
@@ -15,12 +16,14 @@ import org.json.simple.parser.ParseException;
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.provider.Settings.Secure;
 import android.util.Log;
 
 import com.android.helpme.demo.manager.interfaces.UserManagerInterface;
 import com.android.helpme.demo.messagesystem.AbstractMessageSystem;
 import com.android.helpme.demo.messagesystem.AbstractMessageSystemInterface;
 import com.android.helpme.demo.messagesystem.InAppMessage;
+import com.android.helpme.demo.messagesystem.MESSAGE_TYPE;
 import com.android.helpme.demo.utils.User;
 import com.android.helpme.demo.utils.UserInterface;
 
@@ -34,7 +37,9 @@ public class UserManager extends AbstractMessageSystem implements UserManagerInt
 	private static final String USER_PROPERTIES = "user.properties";
 	private static UserManager manager;
 	private InAppMessage message;
-	private ArrayList<User> arrayList;
+	private HashMap<String,User> users;
+	private UserInterface thisUser;
+	private boolean userSet;
 
 	public static UserManager getInstance() {
 		if (manager == null) {
@@ -44,7 +49,23 @@ public class UserManager extends AbstractMessageSystem implements UserManagerInt
 	}
 
 	private UserManager() {
-		arrayList = new ArrayList<User>();
+		users = new HashMap<String, User>();
+		userSet = false;
+	}
+	
+	public boolean isUserSet(){
+		return userSet;
+	}
+
+	public UserInterface getThisUser() {
+		return thisUser;
+	}
+
+	public void setThisUser(UserInterface user, String id) {
+		if (!userSet) {
+			this.thisUser = new User(id, user.getName(), user.getHelfer());
+			userSet =true;
+		}
 	}
 
 	@Override
@@ -71,9 +92,11 @@ public class UserManager extends AbstractMessageSystem implements UserManagerInt
 	 * @see com.android.helpme.demo.manager.UserManagerInterface#addUser(com.android.helpme.demo.utils.User)
 	 */
 	@Override
-	public void addUser(User position) {
-		synchronized (arrayList) {
-			arrayList.add(position);
+	public void addUser(User user) {
+		if (users.containsKey(user.getId())) {
+			users.get(user.getId()).updatePosition(user.getPosition());
+		}else{
+			users.put(user.getId(), user);
 		}
 	}
 
@@ -82,17 +105,23 @@ public class UserManager extends AbstractMessageSystem implements UserManagerInt
 	 */
 	@Override
 	public ArrayList<User> getUsers() {
-		return arrayList;
+		ArrayList<User> list = new ArrayList<User>();
+		Set<String> keys = users.keySet();
+		for (String key : keys) {
+			list.add(users.get(key));
+		}
+		return list;
 	}
 
 	/* (non-Javadoc)
 	 * @see com.android.helpme.demo.manager.UserManagerInterface#getUser(java.lang.String)
 	 */
 	@Override
-	public UserInterface getUser(String userName) {
-		userName = userName.trim();
-		for (UserInterface user : arrayList) {
-			if (user.getName().compareToIgnoreCase(userName) == 0) {
+	public UserInterface getUserByName(String name) {
+		Set<String> keys = users.keySet();
+		for (String key : keys) {
+			User user = users.get(key);
+			if (user.getName().equalsIgnoreCase(name)) {
 				return user;
 			}
 		}
@@ -125,6 +154,7 @@ public class UserManager extends AbstractMessageSystem implements UserManagerInt
 						addUser(new User(object));
 					}
 					Log.i(LOGTAG, "The properties are now loaded");
+					fireMessageFromManager(users, MESSAGE_TYPE.USER);
 				} catch (IOException e) {
 					fireError(e);
 				} catch (ParseException e) {
@@ -133,7 +163,24 @@ public class UserManager extends AbstractMessageSystem implements UserManagerInt
 
 			}
 		};
+	}
+	
+	public Runnable clear() {
+		return new Runnable() {
+			
+			@Override
+			public void run() {
+				synchronized (users) {
+					users.clear();
+				}
+			}
+		};
+		
+	}
 
+	@Override
+	public UserInterface getUserById(String id) {
+		return users.get(id);
 	}
 
 }

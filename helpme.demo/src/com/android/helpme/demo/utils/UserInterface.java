@@ -2,21 +2,26 @@ package com.android.helpme.demo.utils;
 
 import org.json.simple.JSONObject;
 
+import com.android.helpme.demo.utils.position.Position;
 import com.android.helpme.demo.utils.position.PositionInterface;
+import com.google.android.maps.GeoPoint;
 
 public interface UserInterface {
-
-	public static final String ACCOUNT = "ACCOUNT";
-	public static final String HELFER = "HELFER";
+	
+	public String getId();
 
 	public String getName();
 
 	public Boolean getHelfer();
 
-	public PositionInterface getPosition();
+	public Position getPosition();
 
-	public void setPosition(PositionInterface position);
+	public void setPosition(Position position);
 
 	public JSONObject getJsonObject();
+	
+	public GeoPoint getGeoPoint();
+	
+	public void updatePosition(Position position);
 
 }

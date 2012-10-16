@@ -84,6 +84,8 @@ public class MessageOrchestrator extends MessageHandler implements MessageOrches
 			handleRabbitMQMessages(message);
 		}else if (message.getSource() instanceof PositionManager) {
 			handleLocationMessage(message);
+		}else if (message.getSource() instanceof UserManager) {
+			handleUserMessages(message);
 		}
 	}
 

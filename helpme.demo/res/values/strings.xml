@@ -8,5 +8,8 @@
     <string name="waitingtext">waiting for new information</string>
     <string name="helpButton">help Me</string>
     <string name="title_activity_foundhelper">found Helper</string>
+    <string name="Helper">Helfender</string>
+    <string name="LostPerson">Hilfesuchender</string>
+    <string name="title_activity_maps">Maps</string>
 
 </resources>

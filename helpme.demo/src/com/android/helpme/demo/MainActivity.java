@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.android.helpme.demo.DrawManager.DRAWMANAGER_TYPE;
 import com.android.helpme.demo.manager.MessageOrchestrator;
 import com.android.helpme.demo.manager.PositionManager;
 import com.android.helpme.demo.manager.RabbitMQManager;
@@ -36,8 +37,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity implements DrawManager{
 	private static final String LOG_TAG = "MainActivity"; 
-	public static final UserInterface user = new User("Andy", true);
-	private TextView textView;
+	
 	private Button buttonHelpMe;
 	private ProgressBar progressBar;
 	private MessageOrchestratorInterface orchestrator;
@@ -50,7 +50,6 @@ public class MainActivity extends Activity implements DrawManager{
 		setContentView(R.layout.activity_main);
 
 		uihandler = new Handler();
-		textView = (TextView) findViewById(R.id.textView1);
 		buttonHelpMe = (Button) findViewById(R.id.helpButton);
 		progressBar = (ProgressBar) findViewById(R.id.progressBar1);
 		progressBar.setVisibility(ProgressBar.INVISIBLE);
@@ -58,20 +57,9 @@ public class MainActivity extends Activity implements DrawManager{
 	}
 	
 	private void init(){
-		ThreadPool.getThreadPool(10);
-		
 		orchestrator = MessageOrchestrator.getInstance();
 		orchestrator.setDrawManager(DRAWMANAGER_TYPE.MAIN,this);
-		
-		orchestrator.listenToMessageSystem(RabbitMQManager.getInstance());
-		orchestrator.listenToMessageSystem(PositionManager.getInstance(this));
-		orchestrator.listenToMessageSystem(UserManager.getInstance());
-
-		ThreadPool.runTask(RabbitMQManager.getInstance().connect());
-		ThreadPool.runTask(UserManager.getInstance().readUserFromProperty(this));
-
 		wireButton();
-		
 	}
 	
 	
@@ -82,19 +70,21 @@ public class MainActivity extends Activity implements DrawManager{
 			@Override
 			public void onClick(View v) {
 				progressBar.setVisibility(ProgressBar.VISIBLE);
+				buttonHelpMe.setActivated(false);
+				buttonHelpMe.setClickable(false);
 				uihandler.post (PositionManager.getInstance().startLocationTracking());
 			}
 		});
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		getMenuInflater().inflate(R.menu.activity_main, menu);
+//		return true;
+//	}
 	@Override
 	public void drawThis(Object object) {
-		if (object instanceof JSONObject) {
+		if (object instanceof User) {
 //			progressBar.setVisibility(ProgressBar.INVISIBLE);
 			Intent myIntent = new Intent(this.getApplicationContext(), FoundHelperActivity.class);
 			startActivity(myIntent);

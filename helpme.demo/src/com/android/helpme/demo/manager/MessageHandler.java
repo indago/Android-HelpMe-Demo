@@ -47,8 +47,8 @@ public abstract class MessageHandler extends AbstractMessageSystem implements Me
 			}
 			PositionInterface position = (PositionInterface) message.getObject();
 			JSONObject object = new JSONObject();
-			object = MainActivity.user.getJsonObject();
-			object.put(PositionInterface.POSITION, position.getJSON());
+			object = UserManager.getInstance().getThisUser().getJsonObject();
+			object.put(User.POSITION, position.getJSON());
 
 			ThreadPool.runTask(PositionManager.getInstance().stopLocationTracking());
 			ThreadPool.runTask(RabbitMQManager.getInstance().sendString(object.toString()));
@@ -72,31 +72,24 @@ public abstract class MessageHandler extends AbstractMessageSystem implements Me
 		case SEND:
 			// TODO
 			break;
-		case STRING:
-			if (!(message.getObject() instanceof String)) {
-				fireError(new WrongObjectType(message.getObject(), String.class));
+		case USER:
+			if (!(message.getObject() instanceof User)) {
+				fireError(new WrongObjectType(message.getObject(), User.class));
 				return;
 			}
-
-			try {
-				JSONParser parser = new JSONParser();
-				JSONObject object = (JSONObject) parser.parse((String) message.getObject());
-				User user = new User(object);
-				if (!user.getHelfer()) {
-					ThreadPool.runTask(PositionManager.getInstance().startLocationTracking());
-				}
-				UserManager.getInstance().addUser(user);
-				if (getDrawManager(DRAWMANAGER_TYPE.LIST) == null) {
-					getDrawManager(DRAWMANAGER_TYPE.MAIN).drawThis(object);
-				} else {
-					getDrawManager(DRAWMANAGER_TYPE.LIST).drawThis(object);
-				}
-
-
-			} catch (ParseException e) {
-				fireError(e);
-				return;
+			
+			User user = (User) message.getObject();
+			if (UserManager.getInstance().isUserSet() && UserManager.getInstance().getThisUser().getHelfer() && !user.getHelfer()) {
+				ThreadPool.runTask(PositionManager.getInstance().startLocationTracking());
 			}
+			UserManager.getInstance().addUser(user);
+			if (getDrawManager(DRAWMANAGER_TYPE.LIST) == null) {
+				getDrawManager(DRAWMANAGER_TYPE.MAIN).drawThis(user);
+			} else {
+				getDrawManager(DRAWMANAGER_TYPE.LIST).drawThis(user);
+			}
+
+
 			break;
 
 		default:
@@ -107,6 +100,14 @@ public abstract class MessageHandler extends AbstractMessageSystem implements Me
 
 	protected void handleUserMessages(InAppMessage message) {
 		switch (message.getType()) {
+		case USER:
+			if (!(message.getObject() instanceof ArrayList<?>)) {
+				fireError(new WrongObjectType(message.getObject(), ArrayList.class));
+				return;
+			}
+
+			getDrawManager(DRAWMANAGER_TYPE.LOGIN).drawThis(message.getObject());
+			break;
 
 		default:
 			fireError(new UnkownMessageType());

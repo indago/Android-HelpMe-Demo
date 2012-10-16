@@ -103,15 +103,16 @@ public class PositionManager extends AbstractMessageSystem implements PositionMa
 
 	@Override
 	public void onLocationChanged(Location location) {
-		Log.i(getLogTag(), "new Location arrived");
 		if (!SimpleSelectionStrategy.isPositionRelevant(location)) {
 			return;
 		}
-		if (lastLocation != null && !SimpleSelectionStrategy.isPositionRelevant(lastLocation, location)) {
-			return;
-		}
+//		if (lastLocation != null && !SimpleSelectionStrategy.isPositionRelevant(lastLocation, location)) {
+//			return;
+//		}
 		lastLocation = location;
 		PositionInterface wayPointData = new Position(location);
+		Log.i(getLogTag(), "new Location arrived");
+		
 		fireMessageFromManager(wayPointData, MESSAGE_TYPE.LOCATION);
 	}
 
@@ -154,7 +155,9 @@ public class PositionManager extends AbstractMessageSystem implements PositionMa
 				if (lastLocation != null && SimpleSelectionStrategy.isPositionRelevant(lastLocation)) {
 					fireMessageFromManager(new Position(lastLocation), MESSAGE_TYPE.LOCATION);
 				} else {
-					locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, 0, 0, manager);
+					Log.i(LOGTAG, "requesting Location");
+//					locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, manager);
+					locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, manager);
 					started = true;
 					// Looper.myLooper().quit();
 				}

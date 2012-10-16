@@ -13,7 +13,8 @@ public interface UserManagerInterface {
 
 	public  ArrayList<User> getUsers();
 
-	public  UserInterface getUser(String userName);
+	public  UserInterface getUserByName(String userName);
+	public  UserInterface getUserById(String id);
 
 	public  Runnable readUserFromProperty(Activity activity);
 

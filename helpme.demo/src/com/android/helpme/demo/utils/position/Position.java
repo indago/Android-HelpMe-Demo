@@ -23,11 +23,20 @@ import java.util.Date;
 
 import org.json.simple.JSONObject;
 
+import com.android.helpme.demo.utils.User;
+
 import android.R.dimen;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 public class Position implements Serializable, PositionInterface {
+	public static final String PRECISION = "precision";
+	public static final String DIRECTION = "direction";
+	public static final String SPEED = "speed";
+	public static final String LONGITUDE = "longitude";
+	public static final String LATITUDE = "latitude";
+	public static final String DATE = "date";
 	private double longitude;
 	private double latitude;
 	private double speed;
@@ -57,7 +66,7 @@ public class Position implements Serializable, PositionInterface {
 	}
 
 	public Position(JSONObject object) {
-		JSONObject position = (JSONObject) object.get(POSITION);
+		JSONObject position = (JSONObject) object.get(User.POSITION);
 		this.longitude = (Double)position.get(LONGITUDE);
 		this.latitude = (Double)position.get(LATITUDE);
 		this.speed = (Double)position.get(SPEED);

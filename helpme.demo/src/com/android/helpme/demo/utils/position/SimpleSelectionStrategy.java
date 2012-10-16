@@ -46,6 +46,38 @@ public abstract class SimpleSelectionStrategy {
 
 		return true;
 	}
+	
+	public static boolean isPositionRelevant(Position position) {
+		Date now = new Date();
+
+		long ageInMs = now.getTime() - position.getMeasureDateTime();
+
+		if (ageInMs > 2 * 60 * 1000) {
+			return false;
+		}
+
+		return true;
+	}
+	
+	public static boolean isPositionRelevant(Position lastPosition, Position currentPosition){
+		if (hasMovedUnder100m(lastPosition, currentPosition)) {
+			return false;
+		}
+
+		if (hasTurnedUnder10Degree(lastPosition, currentPosition)) {
+			return false;
+		}
+
+		return true;
+	}
+	
+	private static boolean hasMovedUnder100m(Position lastPosition, Position currentPosition) {
+		return Math.abs(lastPosition.calculateSphereDistance(currentPosition)) < 100;
+	}
+	
+	private static boolean hasTurnedUnder10Degree(Position lastPosition, Position currentPosition) {
+		return Math.abs(lastPosition.getDirection() - currentPosition.getDirection()) < 10;
+	}
 
 	private static boolean hasMovedUnder100m(Location lastLocation, Location currentLocation) {
 		return Math.abs(lastLocation.distanceTo(currentLocation)) < 100;
