@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <com.indago.helpme.gui.dashboard.views.HelpERProgressView
+        android:id="@+id/iv_helpme_help_er_indicator"
+        android:layout_width="290dp"
+        android:layout_height="128dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/help_er_indicator_margin_top"
+        android:contentDescription="@string/content_description_help_ee_indicator_bars"
+        android:scaleType="center" />
+
+    <ImageView
+        android:id="@+id/iv_helpme_help_er_buttonboard_mask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="@string/content_description_help_ee_action_btn"
+        android:scaleType="center"
+        android:src="@drawable/buttonboard_mask" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/help_er_btn_margin_top" >
+
+        <TextView
+            android:id="@+id/tv_incomming_call_counter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="60"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white" />
+
+        <com.indago.helpme.gui.dashboard.views.HelpERButtonView
+            android:id="@+id/btn_helpme_help_er_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
+    </FrameLayout>
+
+    <com.indago.helpme.gui.dashboard.views.HelpERHintView
+        android:id="@+id/tv_helpme_help_er_infoarea"
+        android:layout_width="@dimen/help_er_infoarea_layout_width"
+        android:layout_height="@dimen/help_er_infoarea_layout_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/help_er_infoarea_margin_top"
+        android:gravity="center"
+        android:maxLines="4"
+        android:text="@string/text_hint_help_ee_press_green_button"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white"
+        android:textColorLink="@color/white"
+        android:textSize="10pt" />
+
+</FrameLayout>

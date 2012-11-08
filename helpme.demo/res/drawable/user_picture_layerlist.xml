@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item 
+        android:id="@+id/background"
+        android:drawable="@drawable/user_picture_background"></item>
+    <item
+        android:id="@+id/picture"
+        android:drawable="@drawable/ic_person_dummy">
+    </item>
+    <item
+        android:id="@+id/overlay"
+        android:drawable="@drawable/user_picture_overlay">
+    </item>
+    <item
+        android:id="@+id/border"
+        android:drawable="@drawable/user_picture_border">
+    </item>
+
+</layer-list>

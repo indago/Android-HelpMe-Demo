@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SlidingDrawer
+        android:id="@+id/slidingdrawer"
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:animateOnClick="true"
+        android:content="@+id/ll_content"
+        android:handle="@+id/ll_handle"
+        android:orientation="vertical"
+        android:rotation="180" >
+
+        <!-- HANDLE -->
+        <LinearLayout
+            android:id="@id/ll_handle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btn_handle"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/sponsor_area_handle"
+                android:rotation="180"
+                android:text="Handle"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <!-- CONTENT -->
+        <LinearLayout
+            android:id="@id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/helpme_grey_dark"
+            android:rotation="180" >
+        </LinearLayout>
+    </SlidingDrawer>
+    
+</merge>

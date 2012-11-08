@@ -1,0 +1,5 @@
+package com.indago.helpme.gui.dashboard.statemachine;
+
+public enum STATES {
+	DEFAULT, SHIELDED, PART_SHIELDED, UNSHIELDED, PRESSED, LOCKED, CALLCENTER, CALLCENTER_PRESSED, COUNTDOWN, ACCEPTED, DECLINED;
+}

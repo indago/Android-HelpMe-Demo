@@ -1,32 +1,50 @@
 <resources>
 
-    <string name="app_name">IndagoDemo</string>
-    <string name="menu_relog">relog</string>
-    <string name="menu_history">History</string>
-    <string name="title_activity_seeker">Are you looking for Help?</string>
-    <string name="waitingtext">waiting for Help requests</string>
-    <string name="waitingtitle">Waiting...</string>
-    <string name="helpButton">help Me</string>
-    <string name="title_activity_helper">List of Help requests</string>
-    <string name="title_activity_login">Please Login</string>
-    <string name="Helper">Helfender</string>
-    <string name="LostPerson">Hilfesuchender</string>
-    <string name="title_activity_maps">Maps</string>
-    <string name="local_service_started">service started</string>
-    <string name="local_service_stopped">service stopped</string>
-    <string name="new_help_request">New Help request</string>
-    <string name="this_person">This Person is looking for help: </string>
-    <string name="title_activity_helper_coming">Stay put a Helper is coming for you</string>
-    <string name="distance_to_helper">Distance to Helper is: </string>
-    <string name="helper_in_range_title">Helper is in Range</string>
-    <string name="helper_in_range_text">The Helper [name] will arrive at your place shortly and will help you</string>
-    <string name="seeker_in_range_title">Help Seeker is in Range</string>
-    <string name="seeker_in_range_text">The Help Seeker you are looking for is in Range to you, you should be able to spot him/her</string>
-    <string name="somebody_wants_help_title">New Help Request</string>
-    <string name="somebody_wants_help_text">Do you want to help [name]?</string>
-    <string name="no_helper_title">No Helper has been found</string>
-    <string name="no_helper_text">We are sorry but no helping hand could be located near to your position!</string>
-    <string name="history_snippet_text">sometext sometext sometext</string>
-    <string name="title_activity_history">History</string>
+    <!-- Generic -->
+    <string name="app_name">inDAgo HelpMe</string>
+    <string name="default_content_description">default content</string>
+
+    <!-- Tabs -->
+    <string name="tab_settings">Settings</string>
+    <string name="tab_login">Login</string>
+    <string name="tab_helper">Help Providing</string>
+    <string name="tab_helpee">Help Seeking</string>
+    <string name="title_activity_log_in">HelpMe App</string>
+    <string name="title_activity_generic">GenericActivity</string>
+    <string name="title_activity_help_me_button">HelpMeButtonActivity</string>
+    <string name="welcome">Willkommen bei der inDAgo HelpMe App</string>
+    <string name="login">Log In!</string>
+    <string name="sponsor_area_handle_text">Sponsoren</string>
+    <string name="text_hint_help_ee_press_green_button"><![CDATA[<b>NEED HELP?</b><br/>Press the <font color="green"><b>SOS</b></font> button!]]></string>
+    <string name="text_hint_help_ee_press_yellow_button"><![CDATA[Press the <br><font color="yellow"><b>SOS</b></font> button again!]]></string>
+    <string name="text_hint_help_ee_press_red_button"><![CDATA[Press the <br><font color="red"><b>SOS</b></font> button once more!]]></string>
+    <string name="text_hint_help_ee_press_red_button_pressed"><![CDATA[<font color="red"><b>OK!</b></font>]]></string>
+    <string name="text_hint_help_ee_press_call_button"><![CDATA[<b>NO HELPER FOUND!</b><br>Press the <br><font color="yellow"><b>Button</b></font> to call our callcenter!]]></string>
+    <string name="text_hint_help_ee_wait_for_helper"><![CDATA[<b>SEARCHING FOR HELP!</b><br/>Please be patient...]]></string>
+    <string name="text_hint_help_ee_wait_for_callcenter"><![CDATA[<b>CALLING CALL-CENTER!</b><br/>Please be patient...]]></string>
+    <string name="content_description_help_ee_indicator_bars">HelpMe - Seeking - Indicator Bars</string>
+    <string name="content_description_help_ee_action_btn">HelpMe - Seeking - Action Button</string>
+    <string name="title_item_providing_detail">HelpMe App - Details</string>
+    <string name="title_item_providing_list">HelpMe App - Overview</string>
+    <string name="title_activity_incoming_call">HelpMe - Incoming Help Call</string>
+    <string name="title_section3">About</string>
+    <string name="title_section2">Statistics</string>
+    <string name="title_section1">History</string>
+    <string name="title_activity_providing_dashboard">HelpMe - Dashboard</string>
+    <string name="incomming_call_dummy_information"><![CDATA[Name: Gerhard Blaumann<br>Age: 80<br>Aprox. Distance: 350m]]></string>
+    <string name="incomming_call_btn_accept_call">Accept!</string>
+    <string name="incomming_call_btn_decline_call">Decline!</string>
+    <string name="title_activity_accepted_call">HelpMe - Details</string>
+    <string name="accepted_call_informations"><![CDATA[Name: Gerhard Blaumann<br>Age: 80<br>Place: Marktplatz<br>Aprox. Distance: 350m]]></string>
+    <string name="title_activity_call_center">HelpMe - Call Center</string>
+    <string name="seeking_call_center_info"><![CDATA[We are so sorry but no helping hand could be located near to your position!<br><br>Please call our call-center to get help!]]></string>
+
+    <!-- PROVIDIN HELP STRINGS -->
+    <string name="content_description_providing_indicator_bars">HelpMe - Providing - Indicator Bars</string>
+    <string name="content_description_providing_action_btn">HelpMe - Providing - Action Button</string>
+    <string name="text_hint_providing_incomming_call"><![CDATA[<b>Incoming Help Call!</b><br>Slide top menu down for more informations!]]></string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_help_er_controlcenter">HelpERControlcenterActivity</string>
 
 </resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- HELP EE  -->
+    <dimen name="help_ee_infoarea_layout_width">260dp</dimen>
+    <dimen name="help_ee_infoarea_layout_height">130dp</dimen>
+    <dimen name="help_ee_infoarea_margin_bottom">120dp</dimen>
+    <dimen name="help_ee_infoarea_margin_left">70dp</dimen>
+    <dimen name="help_ee_infoarea_margin_right">70dp</dimen>
+    <dimen name="help_ee_infoarea_margin_top">146dp</dimen>
+    <!--  -->
+    <dimen name="help_ee_btn_margin_bottom">0dp</dimen>
+    <dimen name="help_ee_btn_margin_left">0dp</dimen>
+    <dimen name="help_ee_btn_margin_right">0dp</dimen>
+    <dimen name="help_ee_btn_margin_top">312dp</dimen>
+    <!--  -->
+    <dimen name="help_ee_indicator_margin_bottom">0dp</dimen>
+    <dimen name="help_ee_indicator_margin_left">0dp</dimen>
+    <dimen name="help_ee_indicator_margin_right">0dp</dimen>
+    <dimen name="help_ee_indicator_margin_top">278dp</dimen>
+
+    
+    <!-- HELP ER -->
+    <dimen name="help_er_infoarea_layout_width">260dp</dimen>
+    <dimen name="help_er_infoarea_layout_height">130dp</dimen>
+    <dimen name="help_er_infoarea_margin_bottom">120dp</dimen>
+    <dimen name="help_er_infoarea_margin_left">70dp</dimen>
+    <dimen name="help_er_infoarea_margin_right">70dp</dimen>
+    <dimen name="help_er_infoarea_margin_top">146dp</dimen>
+    <!--  -->
+    <dimen name="help_er_btn_margin_bottom">0dp</dimen>
+    <dimen name="help_er_btn_margin_left">0dp</dimen>
+    <dimen name="help_er_btn_margin_right">0dp</dimen>
+    <dimen name="help_er_btn_margin_top">312dp</dimen>
+    <!--  -->
+    <dimen name="help_er_indicator_margin_bottom">0dp</dimen>
+    <dimen name="help_er_indicator_margin_left">0dp</dimen>
+    <dimen name="help_er_indicator_margin_right">0dp</dimen>
+    <dimen name="help_er_indicator_margin_top">278dp</dimen>
+    
+    <!--  -->
+    <dimen name="generic_no_padding">0dp</dimen>
+
+</resources>
