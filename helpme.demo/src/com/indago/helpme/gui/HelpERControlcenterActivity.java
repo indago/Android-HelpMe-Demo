@@ -7,6 +7,8 @@ import android.view.Window;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
+import com.indago.helpme.R;
+
 public class HelpERControlcenterActivity extends Activity {
 
 	private TabHost mTabHost;

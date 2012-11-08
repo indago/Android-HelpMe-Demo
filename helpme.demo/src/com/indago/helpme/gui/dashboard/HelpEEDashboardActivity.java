@@ -13,8 +13,8 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 
+import com.indago.helpme.R;
 import com.indago.helpme.gui.ATemplateActivity;
-import com.indago.helpme.gui.R;
 import com.indago.helpme.gui.dashboard.statemachine.HelpEEStateMachine;
 import com.indago.helpme.gui.dashboard.statemachine.STATES;
 import com.indago.helpme.gui.dashboard.views.HelpEEButtonView;

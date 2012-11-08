@@ -17,8 +17,8 @@ import android.widget.SlidingDrawer;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.indago.helpme.R;
 import com.indago.helpme.gui.ATemplateActivity;
-import com.indago.helpme.gui.R;
 import com.indago.helpme.gui.dashboard.statemachine.HelpERStateMachine;
 import com.indago.helpme.gui.dashboard.statemachine.STATES;
 import com.indago.helpme.gui.dashboard.views.HelpERButtonView;

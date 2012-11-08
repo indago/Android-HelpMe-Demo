@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.indago.helpme.gui;
+package com.indago.helpme.gui2;
 
 import java.util.HashMap;
 import java.util.List;
@@ -180,8 +180,8 @@ public class HelperMapActivity extends MapActivity implements DrawManagerInterfa
 			@Override
 			public void run() {
 				AlertDialog.Builder dlgAlert = new AlertDialog.Builder(context);
-				dlgAlert.setTitle(getString(R.string.seeker_in_range_title));
-				dlgAlert.setMessage(getString(R.string.seeker_in_range_text));
+				dlgAlert.setTitle("SEEKER IN RANGE");
+				dlgAlert.setMessage("SEEKER IN RANGE TEXT");
 				dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
 					@Override

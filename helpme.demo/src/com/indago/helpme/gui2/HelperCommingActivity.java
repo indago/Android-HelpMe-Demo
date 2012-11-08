@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.indago.helpme.gui;
+package com.indago.helpme.gui2;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -53,7 +53,7 @@ public class HelperCommingActivity extends Activity implements DrawManagerInterf
 			@Override
 			public void run() {
 				Double distance = HistoryManager.getInstance().getTask().getDistance();
-				textView.setText(getString(R.string.distance_to_helper) + decimalFormat.format(distance) + " m");
+				textView.setText("Distance to helper: " + decimalFormat.format(distance) + " m");
 			}
 		};
 
@@ -65,8 +65,8 @@ public class HelperCommingActivity extends Activity implements DrawManagerInterf
 			@Override
 			public void run() {
 				AlertDialog.Builder dlgAlert = new AlertDialog.Builder(context);
-				dlgAlert.setTitle(getString(R.string.helper_in_range_title));
-				String text = getString(R.string.helper_in_range_text);
+				dlgAlert.setTitle("HELPER IN RANGE");
+				String text = "HELPER IN RANGE TEXT";
 				text.replace("[name]", userInterface.getName());
 				dlgAlert.setMessage(text);
 				dlgAlert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

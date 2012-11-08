@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.indago.helpme.gui;
+package com.indago.helpme.gui2;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -2,8 +2,8 @@ package com.indago.helpme.gui.dashboard;
 
 import android.os.Bundle;
 
+import com.indago.helpme.R;
 import com.indago.helpme.gui.ATemplateActivity;
-import com.indago.helpme.gui.R;
 
 public class HelpERCallDetailsActivity extends ATemplateActivity {
 

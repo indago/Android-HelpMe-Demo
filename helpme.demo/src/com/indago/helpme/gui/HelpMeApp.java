@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
+import com.indago.helpme.R;
+
 public class HelpMeApp extends ATemplateActivity implements OnItemClickListener {
 	private static final String LOGTAG = HelpMeApp.class.getSimpleName();
 

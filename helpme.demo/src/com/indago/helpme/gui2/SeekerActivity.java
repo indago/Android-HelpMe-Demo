@@ -1,4 +1,4 @@
-package com.indago.helpme.gui;
+package com.indago.helpme.gui2;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -89,8 +89,8 @@ public class SeekerActivity extends Activity implements DrawManagerInterface {
 			@Override
 			public void run() {
 				AlertDialog.Builder dlgAlert = new AlertDialog.Builder(context);
-				dlgAlert.setTitle(getString(R.string.no_helper_title));
-				dlgAlert.setMessage(getString(R.string.no_helper_text));
+				dlgAlert.setTitle("NO HELPER");
+				dlgAlert.setMessage("NO HELPER TEXT");
 				dlgAlert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
 					@Override

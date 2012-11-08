@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.indago.helpme.R;
+
 public class LogInListAdapter extends ArrayAdapter<LogInItem> {
 
 	private Context mContext;

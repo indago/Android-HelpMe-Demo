@@ -13,7 +13,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
-import com.indago.helpme.gui.R;
+import com.indago.helpme.R;
 import com.indago.helpme.gui.dashboard.statemachine.HelpERStateMachine;
 import com.indago.helpme.gui.dashboard.statemachine.IStateAwareView;
 import com.indago.helpme.gui.dashboard.statemachine.IStateMachine;

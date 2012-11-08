@@ -1,4 +1,4 @@
-package com.indago.helpme.gui;
+package com.indago.helpme.gui2;
 
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ public class LoginActivity extends Activity implements DrawManagerInterface {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.foundhelper);
-		this.setTitle(R.string.title_activity_login);
+		this.setTitle("LOGIN ACTIVITY");
 
 		//		Intent intent = new Intent(this, MyService.class);
 		//		this.startService(intent);

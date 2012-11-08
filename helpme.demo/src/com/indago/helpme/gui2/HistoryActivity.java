@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.indago.helpme.gui;
+package com.indago.helpme.gui2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +74,7 @@ public class HistoryActivity extends MapActivity implements DrawManagerInterface
 					User user = new User((JSONObject) jsonObject.get(Task.USER));
 					String snippet = new String();
 
-					snippet = getString(R.string.history_snippet_text);
+					snippet = "HISTORY SNIPPED";
 
 					OverlayItem overlayitem = new OverlayItem(position.getGeoPoint(), user.getName(), snippet);
 					overlay.addOverlay(overlayitem);

@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageButton;
 
-import com.indago.helpme.gui.R;
+import com.indago.helpme.R;
 import com.indago.helpme.gui.dashboard.statemachine.HelpERStateMachine;
 import com.indago.helpme.gui.dashboard.statemachine.IStateAwareView;
 import com.indago.helpme.gui.dashboard.statemachine.IStateMachine;
