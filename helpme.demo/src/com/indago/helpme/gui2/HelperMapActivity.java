@@ -105,7 +105,7 @@ public class HelperMapActivity extends MapActivity implements DrawManagerInterfa
 
 				} else {
 					// not us but
-					if(userInterface.getHelfer()) { // a helper
+					if(userInterface.isHelper()) { // a helper
 						overlayitem = new OverlayItem(userInterface.getGeoPoint(), userInterface.getName(), "ein Helfer");
 						overlayitem.setMarker(blue_marker);
 

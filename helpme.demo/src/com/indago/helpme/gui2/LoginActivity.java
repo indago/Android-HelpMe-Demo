@@ -80,7 +80,7 @@ public class LoginActivity extends Activity implements DrawManagerInterface {
 				if(user != null) {
 					ThreadPool.runTask(UserManager.getInstance().setThisUser(user, getApplicationContext()));
 
-					if(user.getHelfer()) {
+					if(user.isHelper()) {
 						Intent myIntent = new Intent(context, HelperActivity.class);
 						startActivity(myIntent);
 						finish();

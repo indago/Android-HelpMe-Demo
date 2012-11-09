@@ -93,7 +93,7 @@ public class SwitcherActivity extends Activity implements DrawManagerInterface {
 	public void drawThis(Object object) {
 		if(object instanceof User) {
 			User user = (User) object;
-			if(user.getHelfer()) {
+			if(user.isHelper()) {
 				handler.post(startHelperActivity());
 			} else {
 				handler.post(startSeekerActivity());

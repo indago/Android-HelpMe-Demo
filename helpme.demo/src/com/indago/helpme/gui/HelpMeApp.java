@@ -58,6 +58,7 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 		startService(intent);
 
 		mOrchestrator = MessageOrchestrator.getInstance();
+		mOrchestrator.addDrawManager(DRAWMANAGER_TYPE.SWITCHER, this);
 		mOrchestrator.addDrawManager(DRAWMANAGER_TYPE.LOGIN, this);
 
 		mOrchestrator.listenToMessageSystem(RabbitMQManager.getInstance());
@@ -116,6 +117,7 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 
 	@Override
 	protected void onDestroy() {
+		MessageOrchestrator.getInstance().removeDrawManager(DRAWMANAGER_TYPE.SWITCHER);
 		MessageOrchestrator.getInstance().removeDrawManager(DRAWMANAGER_TYPE.LOGIN);
 		super.onDestroy();
 	}
@@ -124,7 +126,7 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 	public void drawThis(Object object) {
 		if(object instanceof User) {
 			User user = (User) object;
-			if(user.getHelfer()) {
+			if(user.isHelper()) {
 				mHandler.post(startHelpERActivity());
 			} else {
 				mHandler.post(startHelpEEActivity());
@@ -134,7 +136,7 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 			final ArrayList<UserInterface> helpERList = new ArrayList<UserInterface>();
 			final ArrayList<UserInterface> helpEEList = new ArrayList<UserInterface>();
 			for(UserInterface user : tmpList) {
-				if(user.getHelfer()) {
+				if(user.isHelper()) {
 					helpERList.add(user);
 				} else {
 					helpEEList.add(user);
