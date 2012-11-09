@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.android.helpme.demo.interfaces.UserInterface;
 import com.indago.helpme.R;
+import com.indago.helpme.gui.util.ImageUtility;
 
 public class LogInListAdapter extends ArrayAdapter<UserInterface> {
 
@@ -57,7 +58,8 @@ public class LogInListAdapter extends ArrayAdapter<UserInterface> {
 
 		holder.name.setText(item.getName());
 
-		holder.drawables[1] = mContext.getResources().getDrawable(item.getPicture());
+		//		holder.drawables[1] = mContext.getResources().getDrawable(item.getPicture());
+		holder.drawables[1] = ImageUtility.retrieveDrawable(getContext(), item.getPicture());
 		holder.picture.setImageDrawable(new LayerDrawable(holder.drawables));
 
 		return convertView;

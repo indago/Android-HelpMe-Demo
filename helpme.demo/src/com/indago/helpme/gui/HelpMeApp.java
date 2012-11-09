@@ -98,7 +98,7 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		LogInItem item = (LogInItem) parent.getItemAtPosition(position);
+		UserInterface item = (UserInterface) parent.getItemAtPosition(position);
 
 		if(item.isHelper()) {
 			startHelpERActivity();
@@ -149,10 +149,10 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 					initTabs(helpERList, helpEEList);
 				}
 			});
-		}else if (object == null) {
+		} else if(object == null) {
 			ThreadPool.runTask(UserManager.getInstance().readUserFromProperty(getApplicationContext()));
 		}
-		
+
 	}
 
 	private Runnable startHelpERActivity() {
