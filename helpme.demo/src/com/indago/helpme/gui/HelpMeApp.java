@@ -34,11 +34,6 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 	/*
 	 * 
 	 */
-	private static final String[] helpERNames = { "Martin M.", "Stefanie M.", "Andreas W." };
-	private static final String[] helpEENames = { "Gerhard L.", "Hanna G.", "Gustav A." };
-
-	private static final int[] helpERPictures = { R.drawable.help_er_martin, R.drawable.help_er_steffi, R.drawable.help_er_andreas };
-	private static final int[] helpEEPictures = { R.drawable.help_ee_man1, R.drawable.help_ee_woman1, R.drawable.help_ee_man2 };
 
 	private ListView lvHelpER;
 	private ListView lvHelpEE;
