@@ -1,3 +1,9 @@
 # cache for current jar dependecy. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
+1352392929000 349078 2d78b07e6e70fdf02f0d0b30cf1dd4bf8ccf4ef0 /Users/martinmajewski/Development/git/Android-HelpMe-Demo/helpme.demo/libs/rabbitmq-client.jar
+1352462345000 349078 2d78b07e6e70fdf02f0d0b30cf1dd4bf8ccf4ef0 /Users/martinmajewski/Development/git/HelpMe-Backend/helpme.demo/libs/rabbitmq-client.jar
+1352392929000 16046 5e303a03d04e6788dddfa3655272580ae0fc13bb /Users/martinmajewski/Development/git/Android-HelpMe-Demo/helpme.demo/libs/json_simple-1.1.jar
+1352462345000 16046 5e303a03d04e6788dddfa3655272580ae0fc13bb /Users/martinmajewski/Development/git/HelpMe-Backend/helpme.demo/libs/json_simple-1.1.jar
+1352462345000 349252 612846c9857077a039b533718f72db3bc041d389 /Users/martinmajewski/Development/git/HelpMe-Backend/helpme.demo/libs/android-support-v4.jar
+1352392929000 349252 612846c9857077a039b533718f72db3bc041d389 /Users/martinmajewski/Development/git/Android-HelpMe-Demo/helpme.demo/libs/android-support-v4.jar

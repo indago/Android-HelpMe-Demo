@@ -1,6 +1,5 @@
 <resources>
 
-    <style name="AppTheme" parent="@android:style/Theme.Holo.NoActionBar.Fullscreen" />
     <color name="sd_content_background">#212121</color>
     <color name="black">#ff000000</color>
     <color name="white">#ffffffff</color>

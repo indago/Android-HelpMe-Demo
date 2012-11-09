@@ -11,18 +11,64 @@
         android:minSdkVersion="16"
         android:targetSdkVersion="16" />
 
-
     <application
+        android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
         <uses-library android:name="com.google.android.maps" />
 
         <activity
+            android:name=".gui.HelpMeApp"
+            android:label="@string/title_activity_log_in"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".gui.dashboard.HelpEEDashboardActivity"
+            android:label="@string/title_activity_help_me_button"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.indago.helpme.gui.HelpMeApp" />
+        </activity>
+        <activity
+            android:name=".gui.dashboard.HelpERDashboardActivity"
+            android:label="@string/title_activity_help_me_button"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.indago.helpme.gui.HelpMeApp" />
+        </activity>
+        <activity
+            android:name=".gui.dashboard.HelpERCallDetailsActivity"
+            android:label="@string/title_activity_help_me_button"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.indago.helpme.gui.HelpERControlcenterActivity" />
+        </activity>
+        <activity
+            android:name=".gui.HelpERControlcenterActivity"
+            android:label="@string/title_activity_help_er_controlcenter"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.indago.helpme.gui.HelpMeApp" />
+        </activity>
+        <activity
             android:name=".gui2.HelperMapActivity"
             android:label="MAPS"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".gui2.LoginActivity"
@@ -49,19 +95,14 @@
             android:label="HELPER COMING"
             android:screenOrientation="portrait" >
         </activity>
-        <activity 
+        <activity
             android:name=".gui2.SwitcherActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="LOGIN"
+            android:screenOrientation="portrait" >
         </activity>
 
         <service
-            android:name="com.indago.helpme.demo.rabbitMQ.RabbitMQService"
+            android:name="com.android.helpme.demo.rabbitMQ.RabbitMQService"
             android:enabled="true"
             android:exported="true"
             android:process=":remote" >

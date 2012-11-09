@@ -13,13 +13,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.helpme.demo.interfaces.UserInterface;
 import com.indago.helpme.R;
 
-public class LogInListAdapter extends ArrayAdapter<LogInItem> {
+public class LogInListAdapter extends ArrayAdapter<UserInterface> {
 
 	private Context mContext;
 
-	public LogInListAdapter(Context context, int resourceId, List<LogInItem> objects) {
+	public LogInListAdapter(Context context, int resourceId, List<UserInterface> objects) {
 		super(context, resourceId, objects);
 		mContext = context;
 	}
@@ -33,7 +34,7 @@ public class LogInListAdapter extends ArrayAdapter<LogInItem> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-		LogInItem item = getItem(position);
+		UserInterface item = getItem(position);
 
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
@@ -56,7 +57,7 @@ public class LogInListAdapter extends ArrayAdapter<LogInItem> {
 
 		holder.name.setText(item.getName());
 
-		holder.drawables[1] = mContext.getResources().getDrawable(item.getImageID());
+		holder.drawables[1] = mContext.getResources().getDrawable(item.getPicture());
 		holder.picture.setImageDrawable(new LayerDrawable(holder.drawables));
 
 		return convertView;

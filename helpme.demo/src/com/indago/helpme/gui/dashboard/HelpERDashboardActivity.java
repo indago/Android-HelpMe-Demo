@@ -3,6 +3,8 @@ package com.indago.helpme.gui.dashboard;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,11 +60,34 @@ public class HelpERDashboardActivity extends ATemplateActivity {
 		mHintViewer = (HelpERHintView) findViewById(R.id.tv_helpme_help_er_infoarea);
 		mButton = (HelpERButtonView) findViewById(R.id.btn_helpme_help_er_button);
 		mCounterText = (TextView) findViewById(R.id.tv_incomming_call_counter);
+
+		/*
+		 * SlidingDrawer Menu Setup
+		 */
 		mSlidingDrawer = (SlidingDrawer) findViewById(R.id.slidingdrawer);
+
+		ViewGroup vg = (ViewGroup) mSlidingDrawer.getContent();
+		vg.setRotation(180);
+		TextView name = (TextView) vg.findViewById(R.id.tv_help_ee_name);
+		TextView age = (TextView) vg.findViewById(R.id.tv_help_ee_age);
+		TextView location = (TextView) vg.findViewById(R.id.tv_help_ee_location);
+
+		Drawable[] drawables = new Drawable[4];
+		drawables[0] = getResources().getDrawable(R.drawable.user_picture_background);
+		drawables[1] = getResources().getDrawable(R.drawable.help_ee_woman1);
+		drawables[2] = getResources().getDrawable(R.drawable.user_picture_overlay);
+		drawables[3] = getResources().getDrawable(R.drawable.user_picture_border);
+
+		ImageView picture = (ImageView) vg.findViewById(R.id.iv_help_ee_picture);
+		picture.setImageDrawable(new LayerDrawable(drawables));
 
 		Button handle = (Button) ((LinearLayout) mSlidingDrawer.getHandle()).getChildAt(0);
 		handle.setText("DRAG DOWN FOR MORE INFORMATIONS!");
 		handle.setTextSize(14f);
+
+		/*
+		 * StateMachine Setup
+		 */
 
 		mStateMachine = HelpERStateMachine.getInstance();
 		mStateMachine.addOne(mButton);
