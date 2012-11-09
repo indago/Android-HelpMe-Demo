@@ -149,7 +149,10 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 					initTabs(helpERList, helpEEList);
 				}
 			});
+		}else if (object == null) {
+			ThreadPool.runTask(UserManager.getInstance().readUserFromProperty(getApplicationContext()));
 		}
+		
 	}
 
 	private Runnable startHelpERActivity() {
