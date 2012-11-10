@@ -17,90 +17,90 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int black=0x7f070016;
-        public static final int blue_center=0x7f070013;
-        public static final int blue_end=0x7f070014;
+        public static final int black=0x7f060016;
+        public static final int blue_center=0x7f060013;
+        public static final int blue_end=0x7f060014;
         /**   
          */
-        public static final int blue_start=0x7f070012;
-        public static final int green_center=0x7f070001;
-        public static final int green_end=0x7f070002;
+        public static final int blue_start=0x7f060012;
+        public static final int green_center=0x7f060001;
+        public static final int green_end=0x7f060002;
         /**   
          */
-        public static final int green_start=0x7f070000;
-        public static final int green_yellow_center=0x7f070004;
-        public static final int green_yellow_end=0x7f070005;
+        public static final int green_start=0x7f060000;
+        public static final int green_yellow_center=0x7f060004;
+        public static final int green_yellow_end=0x7f060005;
         /**   
          */
-        public static final int green_yellow_start=0x7f070003;
-        public static final int helpme_grey_dark=0x7f070018;
-        public static final int red_center=0x7f07000d;
-        public static final int red_dark_center=0x7f070010;
-        public static final int red_dark_end=0x7f070011;
+        public static final int green_yellow_start=0x7f060003;
+        public static final int helpme_grey_dark=0x7f060018;
+        public static final int red_center=0x7f06000d;
+        public static final int red_dark_center=0x7f060010;
+        public static final int red_dark_end=0x7f060011;
         /**   
          */
-        public static final int red_dark_start=0x7f07000f;
-        public static final int red_end=0x7f07000e;
+        public static final int red_dark_start=0x7f06000f;
+        public static final int red_end=0x7f06000e;
         /**   
          */
-        public static final int red_start=0x7f07000c;
-        public static final int sd_content_background=0x7f070015;
-        public static final int white=0x7f070017;
-        public static final int yellow_center=0x7f070007;
-        public static final int yellow_end=0x7f070008;
-        public static final int yellow_red_center=0x7f07000a;
-        public static final int yellow_red_end=0x7f07000b;
+        public static final int red_start=0x7f06000c;
+        public static final int sd_content_background=0x7f060015;
+        public static final int white=0x7f060017;
+        public static final int yellow_center=0x7f060007;
+        public static final int yellow_end=0x7f060008;
+        public static final int yellow_red_center=0x7f06000a;
+        public static final int yellow_red_end=0x7f06000b;
         /**   
          */
-        public static final int yellow_red_start=0x7f070009;
+        public static final int yellow_red_start=0x7f060009;
         /**   
          */
-        public static final int yellow_start=0x7f070006;
+        public static final int yellow_start=0x7f060006;
     }
     public static final class dimen {
         /**   
          */
-        public static final int generic_no_padding=0x7f06001c;
+        public static final int generic_no_padding=0x7f05001c;
         /**   
          */
-        public static final int help_ee_btn_margin_bottom=0x7f060006;
-        public static final int help_ee_btn_margin_left=0x7f060007;
-        public static final int help_ee_btn_margin_right=0x7f060008;
-        public static final int help_ee_btn_margin_top=0x7f060009;
+        public static final int help_ee_btn_margin_bottom=0x7f050006;
+        public static final int help_ee_btn_margin_left=0x7f050007;
+        public static final int help_ee_btn_margin_right=0x7f050008;
+        public static final int help_ee_btn_margin_top=0x7f050009;
         /**   
          */
-        public static final int help_ee_indicator_margin_bottom=0x7f06000a;
-        public static final int help_ee_indicator_margin_left=0x7f06000b;
-        public static final int help_ee_indicator_margin_right=0x7f06000c;
-        public static final int help_ee_indicator_margin_top=0x7f06000d;
-        public static final int help_ee_infoarea_layout_height=0x7f060001;
+        public static final int help_ee_indicator_margin_bottom=0x7f05000a;
+        public static final int help_ee_indicator_margin_left=0x7f05000b;
+        public static final int help_ee_indicator_margin_right=0x7f05000c;
+        public static final int help_ee_indicator_margin_top=0x7f05000d;
+        public static final int help_ee_infoarea_layout_height=0x7f050001;
         /**  HELP EE  
          */
-        public static final int help_ee_infoarea_layout_width=0x7f060000;
-        public static final int help_ee_infoarea_margin_bottom=0x7f060002;
-        public static final int help_ee_infoarea_margin_left=0x7f060003;
-        public static final int help_ee_infoarea_margin_right=0x7f060004;
-        public static final int help_ee_infoarea_margin_top=0x7f060005;
+        public static final int help_ee_infoarea_layout_width=0x7f050000;
+        public static final int help_ee_infoarea_margin_bottom=0x7f050002;
+        public static final int help_ee_infoarea_margin_left=0x7f050003;
+        public static final int help_ee_infoarea_margin_right=0x7f050004;
+        public static final int help_ee_infoarea_margin_top=0x7f050005;
         /**   
          */
-        public static final int help_er_btn_margin_bottom=0x7f060014;
-        public static final int help_er_btn_margin_left=0x7f060015;
-        public static final int help_er_btn_margin_right=0x7f060016;
-        public static final int help_er_btn_margin_top=0x7f060017;
+        public static final int help_er_btn_margin_bottom=0x7f050014;
+        public static final int help_er_btn_margin_left=0x7f050015;
+        public static final int help_er_btn_margin_right=0x7f050016;
+        public static final int help_er_btn_margin_top=0x7f050017;
         /**   
          */
-        public static final int help_er_indicator_margin_bottom=0x7f060018;
-        public static final int help_er_indicator_margin_left=0x7f060019;
-        public static final int help_er_indicator_margin_right=0x7f06001a;
-        public static final int help_er_indicator_margin_top=0x7f06001b;
-        public static final int help_er_infoarea_layout_height=0x7f06000f;
+        public static final int help_er_indicator_margin_bottom=0x7f050018;
+        public static final int help_er_indicator_margin_left=0x7f050019;
+        public static final int help_er_indicator_margin_right=0x7f05001a;
+        public static final int help_er_indicator_margin_top=0x7f05001b;
+        public static final int help_er_infoarea_layout_height=0x7f05000f;
         /**  HELP ER 
          */
-        public static final int help_er_infoarea_layout_width=0x7f06000e;
-        public static final int help_er_infoarea_margin_bottom=0x7f060010;
-        public static final int help_er_infoarea_margin_left=0x7f060011;
-        public static final int help_er_infoarea_margin_right=0x7f060012;
-        public static final int help_er_infoarea_margin_top=0x7f060013;
+        public static final int help_er_infoarea_layout_width=0x7f05000e;
+        public static final int help_er_infoarea_margin_bottom=0x7f050010;
+        public static final int help_er_infoarea_margin_left=0x7f050011;
+        public static final int help_er_infoarea_margin_right=0x7f050012;
+        public static final int help_er_infoarea_margin_top=0x7f050013;
     }
     public static final class drawable {
         public static final int androidmarker_blue=0x7f020000;
@@ -219,7 +219,7 @@ public final class R {
         public static final int view2=0x7f0a0013;
     }
     public static final class integer {
-        public static final int helpme_infofield_max_lines=0x7f080000;
+        public static final int helpme_infofield_max_lines=0x7f070000;
     }
     public static final class layout {
         public static final int activity_help_ee_dashboard=0x7f030000;
@@ -244,79 +244,79 @@ public final class R {
         public static final int help_er_controlcenter=0x7f090001;
     }
     public static final class string {
-        public static final int Helper=0x7f05000a;
-        public static final int LostPerson=0x7f05000b;
-        public static final int accepted_call_informations=0x7f05003b;
+        public static final int Helper=0x7f080008;
+        public static final int LostPerson=0x7f080009;
+        public static final int accepted_call_informations=0x7f08003b;
         /**  Generic 
          */
-        public static final int app_name=0x7f05001b;
-        public static final int content_description_help_ee_action_btn=0x7f05002f;
-        public static final int content_description_help_ee_indicator_bars=0x7f05002e;
-        public static final int content_description_providing_action_btn=0x7f05003f;
+        public static final int app_name=0x7f08001b;
+        public static final int content_description_help_ee_action_btn=0x7f08002f;
+        public static final int content_description_help_ee_indicator_bars=0x7f08002e;
+        public static final int content_description_providing_action_btn=0x7f08003f;
         /**  PROVIDIN HELP STRINGS 
          */
-        public static final int content_description_providing_indicator_bars=0x7f05003e;
-        public static final int default_content_description=0x7f05001c;
-        public static final int distance_to_helper=0x7f050010;
-        public static final int hello_world=0x7f050041;
-        public static final int helpButton=0x7f050007;
-        public static final int helper_in_range_text=0x7f050012;
-        public static final int helper_in_range_title=0x7f050011;
-        public static final int history_snippet_text=0x7f050019;
-        public static final int incomming_call_btn_accept_call=0x7f050038;
-        public static final int incomming_call_btn_decline_call=0x7f050039;
-        public static final int incomming_call_dummy_information=0x7f050037;
-        public static final int local_service_started=0x7f050002;
-        public static final int local_service_stopped=0x7f050003;
-        public static final int login=0x7f050025;
-        public static final int menu_history=0x7f050005;
-        public static final int menu_relog=0x7f050004;
-        public static final int menu_settings=0x7f050042;
-        public static final int new_help_request=0x7f05000d;
-        public static final int no_helper_text=0x7f050018;
-        public static final int no_helper_title=0x7f050017;
-        public static final int seeker_in_range_text=0x7f050014;
-        public static final int seeker_in_range_title=0x7f050013;
-        public static final int seeking_call_center_info=0x7f05003d;
-        public static final int somebody_wants_help_text=0x7f050016;
-        public static final int somebody_wants_help_title=0x7f050015;
-        public static final int sponsor_area_handle_text=0x7f050026;
-        public static final int tab_helpee=0x7f050020;
-        public static final int tab_helper=0x7f05001f;
-        public static final int tab_login=0x7f05001e;
+        public static final int content_description_providing_indicator_bars=0x7f08003e;
+        public static final int default_content_description=0x7f08001c;
+        public static final int distance_to_helper=0x7f080010;
+        public static final int hello_world=0x7f080041;
+        public static final int helpButton=0x7f080005;
+        public static final int helper_in_range_text=0x7f080012;
+        public static final int helper_in_range_title=0x7f080011;
+        public static final int history_snippet_text=0x7f080019;
+        public static final int incomming_call_btn_accept_call=0x7f080038;
+        public static final int incomming_call_btn_decline_call=0x7f080039;
+        public static final int incomming_call_dummy_information=0x7f080037;
+        public static final int local_service_started=0x7f08000b;
+        public static final int local_service_stopped=0x7f08000c;
+        public static final int login=0x7f080025;
+        public static final int menu_history=0x7f080001;
+        public static final int menu_relog=0x7f080000;
+        public static final int menu_settings=0x7f080042;
+        public static final int new_help_request=0x7f08000d;
+        public static final int no_helper_text=0x7f080018;
+        public static final int no_helper_title=0x7f080017;
+        public static final int seeker_in_range_text=0x7f080014;
+        public static final int seeker_in_range_title=0x7f080013;
+        public static final int seeking_call_center_info=0x7f08003d;
+        public static final int somebody_wants_help_text=0x7f080016;
+        public static final int somebody_wants_help_title=0x7f080015;
+        public static final int sponsor_area_handle_text=0x7f080026;
+        public static final int tab_helpee=0x7f080020;
+        public static final int tab_helper=0x7f08001f;
+        public static final int tab_login=0x7f08001e;
         /**  Tabs 
          */
-        public static final int tab_settings=0x7f05001d;
-        public static final int text_hint_help_ee_press_call_button=0x7f05002b;
-        public static final int text_hint_help_ee_press_green_button=0x7f050027;
-        public static final int text_hint_help_ee_press_red_button=0x7f050029;
-        public static final int text_hint_help_ee_press_red_button_pressed=0x7f05002a;
-        public static final int text_hint_help_ee_press_yellow_button=0x7f050028;
-        public static final int text_hint_help_ee_wait_for_callcenter=0x7f05002d;
-        public static final int text_hint_help_ee_wait_for_helper=0x7f05002c;
-        public static final int text_hint_providing_incomming_call=0x7f050040;
-        public static final int this_person=0x7f05000e;
-        public static final int title_activity_accepted_call=0x7f05003a;
-        public static final int title_activity_call_center=0x7f05003c;
-        public static final int title_activity_generic=0x7f050022;
-        public static final int title_activity_help_er_controlcenter=0x7f050043;
-        public static final int title_activity_help_me_button=0x7f050023;
-        public static final int title_activity_helper=0x7f050008;
-        public static final int title_activity_helper_coming=0x7f05000f;
-        public static final int title_activity_history=0x7f05001a;
-        public static final int title_activity_incoming_call=0x7f050032;
-        public static final int title_activity_log_in=0x7f050021;
-        public static final int title_activity_login=0x7f050009;
-        public static final int title_activity_maps=0x7f05000c;
-        public static final int title_activity_providing_dashboard=0x7f050036;
-        public static final int title_activity_seeker=0x7f050006;
-        public static final int title_item_providing_detail=0x7f050030;
-        public static final int title_item_providing_list=0x7f050031;
-        public static final int title_section1=0x7f050035;
-        public static final int title_section2=0x7f050034;
-        public static final int title_section3=0x7f050033;
-        public static final int waitingtext=0x7f050000;
-        public static final int waitingtitle=0x7f050001;
-        public static final int welcome=0x7f050024;
+        public static final int tab_settings=0x7f08001d;
+        public static final int text_hint_help_ee_press_call_button=0x7f08002b;
+        public static final int text_hint_help_ee_press_green_button=0x7f080027;
+        public static final int text_hint_help_ee_press_red_button=0x7f080029;
+        public static final int text_hint_help_ee_press_red_button_pressed=0x7f08002a;
+        public static final int text_hint_help_ee_press_yellow_button=0x7f080028;
+        public static final int text_hint_help_ee_wait_for_callcenter=0x7f08002d;
+        public static final int text_hint_help_ee_wait_for_helper=0x7f08002c;
+        public static final int text_hint_providing_incomming_call=0x7f080040;
+        public static final int this_person=0x7f08000e;
+        public static final int title_activity_accepted_call=0x7f08003a;
+        public static final int title_activity_call_center=0x7f08003c;
+        public static final int title_activity_generic=0x7f080022;
+        public static final int title_activity_help_er_controlcenter=0x7f080043;
+        public static final int title_activity_help_me_button=0x7f080023;
+        public static final int title_activity_helper=0x7f080006;
+        public static final int title_activity_helper_coming=0x7f08000f;
+        public static final int title_activity_history=0x7f08001a;
+        public static final int title_activity_incoming_call=0x7f080032;
+        public static final int title_activity_log_in=0x7f080021;
+        public static final int title_activity_login=0x7f080007;
+        public static final int title_activity_maps=0x7f08000a;
+        public static final int title_activity_providing_dashboard=0x7f080036;
+        public static final int title_activity_seeker=0x7f080002;
+        public static final int title_item_providing_detail=0x7f080030;
+        public static final int title_item_providing_list=0x7f080031;
+        public static final int title_section1=0x7f080035;
+        public static final int title_section2=0x7f080034;
+        public static final int title_section3=0x7f080033;
+        public static final int waitingtext=0x7f080003;
+        public static final int waitingtitle=0x7f080004;
+        public static final int welcome=0x7f080024;
     }
 }
