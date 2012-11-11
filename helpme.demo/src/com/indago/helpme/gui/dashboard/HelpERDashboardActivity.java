@@ -82,7 +82,7 @@ public class HelpERDashboardActivity extends ATemplateActivity {
 		picture.setImageDrawable(new LayerDrawable(drawables));
 
 		Button handle = (Button) ((LinearLayout) mSlidingDrawer.getHandle()).getChildAt(0);
-		handle.setText("DRAG DOWN FOR MORE INFORMATIONS!");
+		handle.setText("DRAG DOWN FOR MORE INFORMATION!");
 		handle.setTextSize(14f);
 
 		/*

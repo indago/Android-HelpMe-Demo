@@ -69,6 +69,9 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 	}
 
 	private void initTabs(ArrayList<UserInterface> helpERList, ArrayList<UserInterface> helpEEList) {
+		if(mTabHost != null)
+			return;
+
 		mTabHost = (TabHost) findViewById(R.id.tabhost);
 		mTabHost.setup();
 
