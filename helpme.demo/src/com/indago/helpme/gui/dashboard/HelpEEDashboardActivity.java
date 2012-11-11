@@ -67,17 +67,40 @@ public class HelpEEDashboardActivity extends ATemplateActivity implements DrawMa
 		mStateMachine.addOne(mButton);
 		mStateMachine.addOne(mHintViewer);
 		mStateMachine.addOne(mProgressBars);
+		mStateMachine.setState(STATES.SHIELDED);
 
-//		mButton.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				if(v instanceof HelpEEButtonView && mStateMachine.getState() == STATES.CALLCENTER_PRESSED) {
-//					mStateMachine.setState(STATES.HELP_INCOMMING);
-//				}
-//			}
-//		});
+		init();
+	}
 
+	@Override
+	protected void onResume() {
+		mStateMachine.setState(STATES.SHIELDED);
+		super.onResume();
+	}
+
+	@Override
+	protected void onPause() {
+
+		if(mIdleTimer != null) {
+			mIdleTimer.dismiss();
+		}
+
+		if(mStateMachine.getState() == STATES.FINISHED) {
+			ThreadPool.runTask(UserManager.getInstance().deleteUserChoice(getApplicationContext()));
+			finish();
+
+		}
+		super.onPause();
+	}
+
+	@Override
+	public void onBackPressed() {
+		if(mStateMachine.getState() == STATES.FINISHED) {
+			super.onBackPressed();
+		}
+	}
+
+	private void init() {
 		mButton.setOnTouchListener(new OnTouchListener() {
 
 			@Override
@@ -134,34 +157,6 @@ public class HelpEEDashboardActivity extends ATemplateActivity implements DrawMa
 			}
 		});
 
-		init();
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		if(mIdleTimer != null) {
-			mIdleTimer.dismiss();
-		}
-
-		if(mStateMachine.getState() == STATES.FINISHED) {
-			ThreadPool.runTask(UserManager.getInstance().deleteUserChoice(getApplicationContext()));
-			finish();
-		} else {
-			mStateMachine.setState(STATES.SHIELDED);
-		}
-
-	}
-
-	@Override
-	public void onBackPressed() {
-		if(mStateMachine.getState() == STATES.HELP_INCOMMING || mStateMachine.getState() == STATES.FINISHED) {
-			ThreadPool.runTask(UserManager.getInstance().deleteUserChoice(getApplicationContext()));
-			finish();
-		}
-	}
-
-	private void init() {
 		orchestrator = MessageOrchestrator.getInstance();
 		orchestrator.addDrawManager(DRAWMANAGER_TYPE.SEEKER, this);
 	}
@@ -236,7 +231,7 @@ public class HelpEEDashboardActivity extends ATemplateActivity implements DrawMa
 
 				@Override
 				public void run() {
-					mStateMachine.setState(STATES.HELP_INCOMMING);
+					toHelpIncomming();
 				}
 			});
 		}
