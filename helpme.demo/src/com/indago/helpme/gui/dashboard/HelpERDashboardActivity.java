@@ -2,6 +2,8 @@ package com.indago.helpme.gui.dashboard;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -90,6 +92,7 @@ public class HelpERDashboardActivity extends ATemplateActivity {
 		 */
 
 		mStateMachine = HelpERStateMachine.getInstance();
+		mStateMachine.setState(STATES.DEFAULT);
 		mStateMachine.addOne(mButton);
 		mStateMachine.addOne(mHintViewer);
 		mStateMachine.addOne(mProgressBars);
@@ -107,7 +110,7 @@ public class HelpERDashboardActivity extends ATemplateActivity {
 						case MotionEvent.ACTION_DOWN:
 							if(mStateMachine.getState() == STATES.DEFAULT) {
 
-								int x = (int) event.getX();
+//								int x = (int) event.getX();
 								int y = (int) event.getY();
 
 								// Toast.makeText(getApplicationContext(), "X: " + x + " Y: " + y, Toast.LENGTH_LONG).show();
@@ -134,15 +137,11 @@ public class HelpERDashboardActivity extends ATemplateActivity {
 								finish();
 							} else if(mStateMachine.getState() == STATES.DECLINED) {
 								Toast.makeText(getApplicationContext(), "Too bad! Maybe next time!", Toast.LENGTH_LONG).show();
-								mCDT.dismiss();
-
-								startActivity(new Intent(getApplicationContext(), com.indago.helpme.gui.HelpERControlcenterActivity.class));
-
-								finish();
+								declineCall();
 							} else {
 								Toast.makeText(getApplicationContext(), "UNDEFINED!", Toast.LENGTH_LONG).show();
 							}
-							mStateMachine.setState(STATES.DEFAULT);
+							//mStateMachine.setState(STATES.DEFAULT);
 							break;
 					}
 				}
@@ -168,8 +167,46 @@ public class HelpERDashboardActivity extends ATemplateActivity {
 	protected void onPause() {
 		super.onPause();
 		//mCountdown.dissmiss();
-		mStateMachine.setState(STATES.DEFAULT);
+		//mStateMachine.setState(STATES.DEFAULT);
 		mCDT.dismiss();
+		finish();
+	}
+
+	public void onBackPressed() {
+
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+		// set title
+		alertDialogBuilder.setTitle("Warning!\nDeclining Incomming Call!");
+
+		// set dialog message
+		alertDialogBuilder.setMessage("Do you really want to decline this call?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				declineCall();
+			}
+		}).setNegativeButton("No", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// if this button is clicked, just close
+				// the dialog box and do nothing
+				dialog.cancel();
+			}
+		});
+
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
+
+		//super.onBackPressed();
+	}
+
+	private void declineCall() {
+		mCDT.dismiss();
+
+		Intent intent = new Intent(getApplicationContext(), com.indago.helpme.gui.dashboard.HelpERControlcenterActivity.class);
+		startActivity(intent);
+
 		finish();
 	}
 
@@ -206,9 +243,7 @@ public class HelpERDashboardActivity extends ATemplateActivity {
 			if(!dismissed) {
 				Toast.makeText(getApplicationContext(), "Time's up!", Toast.LENGTH_LONG).show();
 
-				startActivity(new Intent(getApplicationContext(), com.indago.helpme.gui.HelpERControlcenterActivity.class));
-
-				finish();
+				declineCall();
 			}
 
 			super.onPostExecute(result);

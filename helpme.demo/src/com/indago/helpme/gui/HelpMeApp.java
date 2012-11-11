@@ -69,22 +69,21 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 	}
 
 	private void initTabs(ArrayList<UserInterface> helpERList, ArrayList<UserInterface> helpEEList) {
-		if(mTabHost != null)
-			return;
+		if(mTabHost == null) {
+			mTabHost = (TabHost) findViewById(R.id.tabhost);
+			mTabHost.setup();
 
-		mTabHost = (TabHost) findViewById(R.id.tabhost);
-		mTabHost.setup();
+			TabSpec specHelpER = mTabHost.newTabSpec((String) getResources().getText(R.string.tab_helper));
+			specHelpER.setContent(R.id.ll_tab1);
+			specHelpER.setIndicator((String) getResources().getText(R.string.tab_helper));
 
-		TabSpec specHelpER = mTabHost.newTabSpec((String) getResources().getText(R.string.tab_helper));
-		specHelpER.setContent(R.id.ll_tab1);
-		specHelpER.setIndicator((String) getResources().getText(R.string.tab_helper));
+			TabSpec specHelpEE = mTabHost.newTabSpec((String) getResources().getText(R.string.tab_helpee));
+			specHelpEE.setContent(R.id.ll_tab2);
+			specHelpEE.setIndicator((String) getResources().getText(R.string.tab_helpee));
 
-		TabSpec specHelpEE = mTabHost.newTabSpec((String) getResources().getText(R.string.tab_helpee));
-		specHelpEE.setContent(R.id.ll_tab2);
-		specHelpEE.setIndicator((String) getResources().getText(R.string.tab_helpee));
-
-		mTabHost.addTab(specHelpER);
-		mTabHost.addTab(specHelpEE);
+			mTabHost.addTab(specHelpER);
+			mTabHost.addTab(specHelpEE);
+		}
 
 		LogInListAdapter adapterHelpER = new LogInListAdapter(getApplicationContext(), R.layout.list_item_picture_text, helpERList);
 		LogInListAdapter adapterHelpEE = new LogInListAdapter(getApplicationContext(), R.layout.list_item_picture_text, helpEEList);
@@ -101,12 +100,16 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		UserInterface item = (UserInterface) parent.getItemAtPosition(position);
+		UserInterface user = (UserInterface) parent.getItemAtPosition(position);
 
-		if(item.isHelper()) {
-			mHandler.post(startHelpERActivity());
-		} else {
-			mHandler.post(startHelpEEActivity());
+		if(user != null) {
+			ThreadPool.runTask(UserManager.getInstance().setThisUser(user, getApplicationContext()));
+
+			if(user.isHelper()) {
+				mHandler.post(startHelpERActivity());
+			} else {
+				mHandler.post(startHelpEEActivity());
+			}
 		}
 	}
 
@@ -116,6 +119,7 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 
 		ThreadPool.runTask(RabbitMQManager.getInstance().bindToService(this));
 		ThreadPool.runTask(UserManager.getInstance().readUserChoice(getApplicationContext()));
+		//ThreadPool.runTask(UserManager.getInstance().deleteUserChoice(getApplicationContext()));
 	}
 
 	@Override

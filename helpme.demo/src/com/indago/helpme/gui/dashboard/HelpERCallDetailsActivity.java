@@ -2,6 +2,7 @@ package com.indago.helpme.gui.dashboard;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.indago.helpme.R;
@@ -28,8 +29,7 @@ public class HelpERCallDetailsActivity extends ATemplateActivity {
 		// set dialog message
 		alertDialogBuilder.setMessage("Do you really want to cancel your current support offer?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				// if this button is clicked, close
-				// current activity
+				startActivity(new Intent(getApplicationContext(), com.indago.helpme.gui.dashboard.HelpERControlcenterActivity.class));
 				finish();
 			}
 		}).setNegativeButton("No", new DialogInterface.OnClickListener() {

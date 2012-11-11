@@ -13,6 +13,8 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 
+import com.android.helpme.demo.manager.UserManager;
+import com.android.helpme.demo.utils.ThreadPool;
 import com.indago.helpme.R;
 import com.indago.helpme.gui.ATemplateActivity;
 import com.indago.helpme.gui.dashboard.statemachine.HelpEEStateMachine;
@@ -134,10 +136,22 @@ public class HelpEEDashboardActivity extends ATemplateActivity {
 			mIdleTimer.dismiss();
 		}
 
-		mStateMachine.setState(STATES.SHIELDED);
+		if(mStateMachine.getState() == STATES.FINISHED) {
+			finish();
+		} else {
+			mStateMachine.setState(STATES.SHIELDED);
+		}
 
-		finish();
 	}
+
+	@Override
+	protected void onDestroy() {
+		ThreadPool.runTask(UserManager.getInstance().deleteUserChoice(getApplicationContext()));
+		super.onDestroy();
+	}
+
+	@Override
+	public void onBackPressed() {}
 
 	private void reset() {
 		mTopCover.setImageResource(R.drawable.drawable_white);

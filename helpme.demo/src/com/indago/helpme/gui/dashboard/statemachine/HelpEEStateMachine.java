@@ -2,8 +2,6 @@ package com.indago.helpme.gui.dashboard.statemachine;
 
 import java.util.ArrayList;
 
-
-
 public class HelpEEStateMachine extends AStateMachine {
 	private static String LOGTAG = HelpEEStateMachine.class.getSimpleName();
 
@@ -30,30 +28,30 @@ public class HelpEEStateMachine extends AStateMachine {
 	@Override
 	synchronized public Enum<?> nextState() {
 		switch((STATES) mState) {
-		case SHIELDED:
+			case SHIELDED:
 				mState = STATES.PART_SHIELDED;
-			break;
-		case PART_SHIELDED:
+				break;
+			case PART_SHIELDED:
 				mState = STATES.UNSHIELDED;
-			break;
-		case UNSHIELDED:
+				break;
+			case UNSHIELDED:
 				mState = STATES.PRESSED;
-			break;
-		case PRESSED:
+				break;
+			case PRESSED:
 				mState = STATES.LOCKED;
-			break;
-		case LOCKED:
+				break;
+			case LOCKED:
 				mState = STATES.CALLCENTER;
-			break;
-		case CALLCENTER:
+				break;
+			case CALLCENTER:
 				mState = STATES.CALLCENTER_PRESSED;
-			break;
-		case CALLCENTER_PRESSED:
+				break;
+			case CALLCENTER_PRESSED:
+				mState = STATES.FINISHED;
+				break;
+			default:
 				mState = STATES.SHIELDED;
-			break;
-		default:
-				mState = STATES.SHIELDED;
-			break;
+				break;
 		}
 
 		updateAll();

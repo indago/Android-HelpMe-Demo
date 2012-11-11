@@ -1,4 +1,4 @@
-package com.indago.helpme.gui;
+package com.indago.helpme.gui.dashboard;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.Window;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
+import com.android.helpme.demo.manager.UserManager;
+import com.android.helpme.demo.utils.ThreadPool;
 import com.indago.helpme.R;
 
 public class HelpERControlcenterActivity extends Activity {
@@ -40,5 +42,11 @@ public class HelpERControlcenterActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.help_er_controlcenter, menu);
 		return true;
+	}
+
+	@Override
+	public void onBackPressed() {
+		ThreadPool.runTask(UserManager.getInstance().deleteUserChoice(getApplicationContext()));
+		finish();
 	}
 }
