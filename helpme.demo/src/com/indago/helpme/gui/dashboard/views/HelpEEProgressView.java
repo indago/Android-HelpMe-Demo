@@ -1,5 +1,6 @@
 package com.indago.helpme.gui.dashboard.views;
 
+import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.Keyframe;
@@ -8,6 +9,7 @@ import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
@@ -25,7 +27,9 @@ public class HelpEEProgressView extends ImageView implements IStateAwareView {
 	public static enum ANIMATION {
 		FLASH, FLASH_GREEN, FLASH_YELLOW, FLASH_RED, FLASH_BLUE,
 
-		PROGRESS, PROGRESS_GREEN, PROGRESS_YELLOW, PROGRESS_RED, PROGRESS_BLUE;
+		PROGRESS, PROGRESS_GREEN, PROGRESS_YELLOW, PROGRESS_RED, PROGRESS_BLUE,
+
+		STANDBY;
 	}
 
 	public static enum GRADIENT_COLORS {
@@ -50,9 +54,10 @@ public class HelpEEProgressView extends ImageView implements IStateAwareView {
 
 	private STATES mState;
 	private GradientDrawable drawable;
+	private ObjectAnimator pulse;
 	private AnimatorSet flash;
-	private AnimatorSet asProgressAnim;
-	private volatile AnimatorSet activeAnimation = null;
+	private AnimatorSet progress;
+	private volatile Animator activeAnimation = null;
 
 	public HelpEEProgressView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -82,11 +87,20 @@ public class HelpEEProgressView extends ImageView implements IStateAwareView {
 		GRADIENT_COLORS.RED.setColors(getContext().getResources().getColor(R.color.red_start), getContext().getResources().getColor(R.color.red_center), getContext().getResources().getColor(R.color.red_end));
 		GRADIENT_COLORS.BLUE.setColors(getContext().getResources().getColor(R.color.blue_start), getContext().getResources().getColor(R.color.blue_center), getContext().getResources().getColor(R.color.blue_end));
 
-		flash = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.helpme_seeking_indicator_flash);
+		flash = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.indicator_flash);
 		flash.setTarget(this);
 
-		asProgressAnim = HelpEEProgressView.createProgressAnimatorSet();
-		asProgressAnim.setTarget(this);
+		pulse = new ObjectAnimator();
+		pulse.setProperty(ALPHA);
+		pulse.setDuration(1500);
+		pulse.setFloatValues(0.0f, 1.0f);
+		pulse.setInterpolator(new AccelerateDecelerateInterpolator());
+		pulse.setRepeatCount(ObjectAnimator.INFINITE);
+		pulse.setRepeatMode(ObjectAnimator.REVERSE);
+		pulse.setTarget(this);
+
+		progress = HelpEEProgressView.createProgressAnimatorSet();
+		progress.setTarget(this);
 	}
 
 	public void startAnimation(ANIMATION animation) {
@@ -119,17 +133,21 @@ public class HelpEEProgressView extends ImageView implements IStateAwareView {
 				break;
 			case PROGRESS:
 			case PROGRESS_BLUE:
-				activeAnimation = asProgressAnim;
+				activeAnimation = progress;
 				setPivotY(this.getMeasuredHeight());
 				drawable.setColors(GRADIENT_COLORS.BLUE.getColors());
 				activeAnimation.start();
 				break;
 			case PROGRESS_YELLOW:
-				activeAnimation = asProgressAnim;
+				activeAnimation = progress;
 				setPivotY(this.getMeasuredHeight());
 				drawable.setColors(GRADIENT_COLORS.YELLOW.getColors());
 				activeAnimation.start();
 				break;
+			case STANDBY:
+				activeAnimation = pulse;
+				drawable.setColors(GRADIENT_COLORS.GREEN.getColors());
+				activeAnimation.start();
 			default:
 				break;
 		}
@@ -179,6 +197,10 @@ public class HelpEEProgressView extends ImageView implements IStateAwareView {
 			case CALLCENTER_PRESSED:
 				mState = STATES.CALLCENTER_PRESSED;
 				startAnimation(ANIMATION.PROGRESS_YELLOW);
+				break;
+			case HELP_INCOMMING:
+				mState = STATES.HELP_INCOMMING;
+				startAnimation(ANIMATION.STANDBY);
 				break;
 			default:
 				break;

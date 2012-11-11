@@ -98,7 +98,7 @@ public class HelpERProgressView extends ImageView implements IStateAwareView {
 		countdown_colors[4] = GRADIENT_COLORS.RED.getColors();
 		countdown_colors[5] = GRADIENT_COLORS.RED_DARK.getColors();
 
-		flash = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.helpme_seeking_indicator_flash);
+		flash = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.indicator_flash);
 		flash.setTarget(this);
 
 		asProgressAnim = HelpERProgressView.createProgressAnimatorSet();

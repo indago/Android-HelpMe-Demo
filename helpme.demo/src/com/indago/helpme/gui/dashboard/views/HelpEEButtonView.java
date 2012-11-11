@@ -14,7 +14,7 @@ import com.indago.helpme.gui.dashboard.statemachine.STATES;
 public class HelpEEButtonView extends ImageButton implements IStateAwareView {
 	private static final String LOGTAG = HelpEEButtonView.class.getSimpleName();
 
-	private static final int STATESS_MAX = 7;
+	private static final int STATESS_MAX = 8;
 	private STATES mState;
 	private Drawable[] drawables = new Drawable[STATESS_MAX];
 
@@ -41,6 +41,7 @@ public class HelpEEButtonView extends ImageButton implements IStateAwareView {
 		drawables[4] = context.getResources().getDrawable(R.drawable.btn_sos_wait);
 		drawables[5] = context.getResources().getDrawable(R.drawable.btn_call_default);
 		drawables[6] = context.getResources().getDrawable(R.drawable.btn_call_pressed);
+		drawables[7] = context.getResources().getDrawable(R.drawable.btn_help_incomming);
 
 		this.setBackground(context.getResources().getDrawable(R.drawable.undefined));
 
@@ -84,6 +85,10 @@ public class HelpEEButtonView extends ImageButton implements IStateAwareView {
 			case CALLCENTER_PRESSED:
 				mState = STATES.CALLCENTER_PRESSED;
 				this.setBackground(drawables[6]);
+				break;
+			case HELP_INCOMMING:
+				mState = STATES.CALLCENTER_PRESSED;
+				this.setBackground(drawables[7]);
 				break;
 			default:
 				break;

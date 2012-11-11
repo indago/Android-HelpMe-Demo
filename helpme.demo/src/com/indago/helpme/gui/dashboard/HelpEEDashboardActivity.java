@@ -5,16 +5,21 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 
+import com.android.helpme.demo.interfaces.DrawManagerInterface;
+import com.android.helpme.demo.manager.HistoryManager;
+import com.android.helpme.demo.manager.MessageOrchestrator;
 import com.android.helpme.demo.manager.UserManager;
+import com.android.helpme.demo.utils.Task;
 import com.android.helpme.demo.utils.ThreadPool;
+import com.android.helpme.demo.utils.User;
 import com.indago.helpme.R;
 import com.indago.helpme.gui.ATemplateActivity;
 import com.indago.helpme.gui.dashboard.statemachine.HelpEEStateMachine;
@@ -23,25 +28,30 @@ import com.indago.helpme.gui.dashboard.views.HelpEEButtonView;
 import com.indago.helpme.gui.dashboard.views.HelpEEHintView;
 import com.indago.helpme.gui.dashboard.views.HelpEEProgressView;
 
-public class HelpEEDashboardActivity extends ATemplateActivity {
+public class HelpEEDashboardActivity extends ATemplateActivity implements DrawManagerInterface {
 	private static final String LOGTAG = HelpEEDashboardActivity.class.getSimpleName();
 
+	private Handler mHandler;
+
+	private MessageOrchestrator orchestrator;
 	private ImageView mTopCover;
 	private Animator mFadeIn;
 	private Animator mFadeOut;
 	private HelpEEProgressView mProgressBars;
 	private HelpEEButtonView mButton;
 	private HelpEEHintView mHintViewer;
-	private Vibrator mVibrator;
 	private HelpEEStateMachine mStateMachine;
 
-	private resetTimer mIdleTimer;
+	private Vibrator mVibrator;
+	private ResetTimer mIdleTimer;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		Log.d(LOGTAG, "... logged in!");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_help_ee_dashboard);
+
+		mHandler = new Handler();
 
 		mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
@@ -58,15 +68,15 @@ public class HelpEEDashboardActivity extends ATemplateActivity {
 		mStateMachine.addOne(mHintViewer);
 		mStateMachine.addOne(mProgressBars);
 
-		mButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				if(v instanceof HelpEEButtonView && mStateMachine.getState() == STATES.LOCKED) {
-					toCallCenter();
-				}
-			}
-		});
+//		mButton.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				if(v instanceof HelpEEButtonView && mStateMachine.getState() == STATES.CALLCENTER_PRESSED) {
+//					mStateMachine.setState(STATES.HELP_INCOMMING);
+//				}
+//			}
+//		});
 
 		mButton.setOnTouchListener(new OnTouchListener() {
 
@@ -74,60 +84,61 @@ public class HelpEEDashboardActivity extends ATemplateActivity {
 			public boolean onTouch(View v, MotionEvent event) {
 				if(v instanceof HelpEEButtonView) {
 
-					switch(event.getAction()) {
-						case MotionEvent.ACTION_DOWN:
-							if(mStateMachine.getState() != STATES.LOCKED) {
+					if(mStateMachine.getState() != STATES.HELP_INCOMMING && mStateMachine.getState() != STATES.CALLCENTER_PRESSED) {
 
-								mStateMachine.nextState();
+						switch(event.getAction()) {
+							case MotionEvent.ACTION_DOWN:
+								if(mStateMachine.getState() != STATES.LOCKED) {
 
-								switch((STATES) mStateMachine.getState()) {
-									case PART_SHIELDED:
-										if(mIdleTimer != null) {
-											mIdleTimer = new resetTimer();
-											mIdleTimer.execute(6000L);
-										}
-										break;
-									case PRESSED:
-										if(mIdleTimer != null) {
-											mIdleTimer.dismiss();
-										}
-										break;
+									mStateMachine.nextState();
 
-									default:
-										if(mIdleTimer != null) {
-											mIdleTimer.resetTime();
-										}
-										break;
+									switch((STATES) mStateMachine.getState()) {
+										case PART_SHIELDED:
+											if(mIdleTimer != null) {
+												mIdleTimer = new ResetTimer();
+												mIdleTimer.execute(6000L);
+											}
+											break;
+										case PRESSED:
+											if(mIdleTimer != null) {
+												mIdleTimer.dismiss();
+											}
+											break;
+
+										default:
+											if(mIdleTimer != null) {
+												mIdleTimer.resetTime();
+											}
+											break;
+									}
+
+									mVibrator.vibrate(10);
+
+								} else {
+									/**
+									 * FOR TESTING PURPOSE
+									 */
+									//new SetStateTimer(10000L).execute(STATES.CALLCENTER);
 								}
 
-								mVibrator.vibrate(10);
+								break;
+							case MotionEvent.ACTION_UP:
+								if(mStateMachine.getState() == STATES.PRESSED) {
+									HistoryManager.getInstance().startNewTask();
+									ButtonStateChangeDelay mBRTimer = new ButtonStateChangeDelay();
+									mBRTimer.execute(STATES.LOCKED);
+								}
+								break;
+						}
 
-							} else {
-								/**
-								 * FOR TESTING PURPOSE
-								 */
-								//new setStateTimer(10000L).execute(STATES.CALLCENTER);
-							}
-
-							break;
-						case MotionEvent.ACTION_UP:
-							if(mStateMachine.getState() == STATES.PRESSED) {
-								ButtonStateChangeDelay mBRTimer = new ButtonStateChangeDelay();
-								mBRTimer.execute(STATES.LOCKED);
-							}
-							break;
 					}
 				}
 				return false;
 			}
 		});
-	}
 
-	//	@Override
-	//	public boolean onCreateOptionsMenu(Menu menu) {
-	//		getMenuInflater().inflate(R.menu.activity_help_ee_dashboard, menu);
-	//		return true;
-	//	}
+		init();
+	}
 
 	@Override
 	protected void onPause() {
@@ -137,6 +148,7 @@ public class HelpEEDashboardActivity extends ATemplateActivity {
 		}
 
 		if(mStateMachine.getState() == STATES.FINISHED) {
+			ThreadPool.runTask(UserManager.getInstance().deleteUserChoice(getApplicationContext()));
 			finish();
 		} else {
 			mStateMachine.setState(STATES.SHIELDED);
@@ -145,13 +157,18 @@ public class HelpEEDashboardActivity extends ATemplateActivity {
 	}
 
 	@Override
-	protected void onDestroy() {
-		ThreadPool.runTask(UserManager.getInstance().deleteUserChoice(getApplicationContext()));
-		super.onDestroy();
+	public void onBackPressed() {
+		if(mStateMachine.getState() == STATES.HELP_INCOMMING || mStateMachine.getState() == STATES.FINISHED) {
+			mStateMachine.setState(STATES.DEFAULT);
+			ThreadPool.runTask(UserManager.getInstance().deleteUserChoice(getApplicationContext()));
+			super.onBackPressed();
+		}
 	}
 
-	@Override
-	public void onBackPressed() {}
+	private void init() {
+		orchestrator = MessageOrchestrator.getInstance();
+		orchestrator.addDrawManager(DRAWMANAGER_TYPE.SEEKER, this);
+	}
 
 	private void reset() {
 		mTopCover.setImageResource(R.drawable.drawable_white);
@@ -163,6 +180,27 @@ public class HelpEEDashboardActivity extends ATemplateActivity {
 			public void onAnimationEnd(Animator animation) {
 
 				mStateMachine.setState(STATES.SHIELDED);
+
+				mFadeOut.start();
+				super.onAnimationEnd(animation);
+			}
+		});
+
+		long[] pattern = { 0, 25, 75, 25, 75, 25, 75, 25 };
+		mVibrator.vibrate(pattern, -1);
+		mFadeIn.start();
+	}
+
+	public void toHelpIncomming() {
+		mTopCover.setImageResource(R.drawable.drawable_green);
+		mFadeIn.setTarget(mTopCover);
+		mFadeOut.setTarget(mTopCover);
+		mFadeOut.setStartDelay(100);
+		mFadeIn.addListener(new AnimatorListenerAdapter() {
+			@Override
+			public void onAnimationEnd(Animator animation) {
+
+				mStateMachine.setState(STATES.HELP_INCOMMING);
 
 				mFadeOut.start();
 				super.onAnimationEnd(animation);
@@ -195,14 +233,36 @@ public class HelpEEDashboardActivity extends ATemplateActivity {
 		mFadeIn.start();
 	}
 
-	class resetTimer extends AsyncTask<Long, Void, Void> {
+	@Override
+	public void drawThis(Object object) {
+		if(object instanceof User) {
+			mHandler.post(new Runnable() {
+
+				@Override
+				public void run() {
+					mStateMachine.setState(STATES.HELP_INCOMMING);
+				}
+			});
+		}
+		if(object instanceof Task) {
+			mHandler.post(new Runnable() {
+
+				@Override
+				public void run() {
+					toCallCenter();
+				}
+			});
+		}
+	}
+
+	class ResetTimer extends AsyncTask<Long, Void, Void> {
 
 		private volatile long idleTimeout = 10000;
 		private volatile boolean dismissed = false;
 
 		private long oldTime;
 
-		public resetTimer() {}
+		public ResetTimer() {}
 
 		synchronized public void resetTime() {
 			oldTime = System.currentTimeMillis();
@@ -238,14 +298,14 @@ public class HelpEEDashboardActivity extends ATemplateActivity {
 		}
 	}
 
-	class setStateTimer extends AsyncTask<STATES, Void, STATES> {
+	class SetStateTimer extends AsyncTask<STATES, Void, STATES> {
 
 		private volatile long idleTimeout = 10000;
 		private volatile boolean dismissed = false;
 
 		private long oldTime;
 
-		public setStateTimer(long waitTime) {
+		public SetStateTimer(long waitTime) {
 			idleTimeout = waitTime;
 		}
 

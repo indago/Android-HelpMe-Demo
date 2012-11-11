@@ -41,12 +41,15 @@ public class HelpEEStateMachine extends AStateMachine {
 				mState = STATES.LOCKED;
 				break;
 			case LOCKED:
-				mState = STATES.CALLCENTER;
+				//mState = STATES.CALLCENTER;
 				break;
 			case CALLCENTER:
 				mState = STATES.CALLCENTER_PRESSED;
 				break;
 			case CALLCENTER_PRESSED:
+				mState = STATES.FINISHED;
+				break;
+			case HELP_INCOMMING:
 				mState = STATES.FINISHED;
 				break;
 			default:

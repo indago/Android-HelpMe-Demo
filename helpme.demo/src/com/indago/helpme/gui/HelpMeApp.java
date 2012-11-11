@@ -31,15 +31,8 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 	private Handler mHandler;
 	private MessageOrchestrator mOrchestrator;
 
-	/*
-	 * 
-	 */
-
 	private ListView lvHelpER;
 	private ListView lvHelpEE;
-
-	//	private List<LogInItem> helpERItems;
-	//	private List<LogInItem> helpEEItems;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

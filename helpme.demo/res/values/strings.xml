@@ -43,6 +43,8 @@
     <string name="welcome">Willkommen bei der inDAgo HelpMe App</string>
     <string name="login">Log In!</string>
     <string name="sponsor_area_handle_text">Sponsoren</string>
+    
+    <!-- SEEKING HELP STRINGS -->
     <string name="text_hint_help_ee_press_green_button"><![CDATA[<b>NEED HELP?</b><br/>Press the <font color="green"><b>SOS</b></font> button!]]></string>
     <string name="text_hint_help_ee_press_yellow_button"><![CDATA[Press the <br><font color="yellow"><b>SOS</b></font> button again!]]></string>
     <string name="text_hint_help_ee_press_red_button"><![CDATA[Press the <br><font color="red"><b>SOS</b></font> button once more!]]></string>
@@ -50,6 +52,7 @@
     <string name="text_hint_help_ee_press_call_button"><![CDATA[<b>NO HELPER FOUND!</b><br>Press the <br><font color="yellow"><b>Button</b></font> to call our callcenter!]]></string>
     <string name="text_hint_help_ee_wait_for_helper"><![CDATA[<b>SEARCHING FOR HELP!</b><br/>Please be patient...]]></string>
     <string name="text_hint_help_ee_wait_for_callcenter"><![CDATA[<b>CALLING CALL-CENTER!</b><br/>Please be patient...]]></string>
+    <string name="help_is_underway"><![CDATA[<b>HELP IS ON THE WAY!]]></string>
     <string name="content_description_help_ee_indicator_bars">HelpMe - Seeking - Indicator Bars</string>
     <string name="content_description_help_ee_action_btn">HelpMe - Seeking - Action Button</string>
     <string name="title_item_providing_detail">HelpMe App - Details</string>

@@ -74,6 +74,10 @@ public class HelpEEHintView extends TextView implements IStateAwareView {
 				mState = STATES.CALLCENTER_PRESSED;
 				setTextAsHTML(getResources().getString(R.string.text_hint_help_ee_wait_for_callcenter));
 				break;
+			case HELP_INCOMMING:
+				mState = STATES.HELP_INCOMMING;
+				setTextAsHTML(getResources().getString(R.string.help_is_underway));
+				break;
 			default:
 				break;
 		}
