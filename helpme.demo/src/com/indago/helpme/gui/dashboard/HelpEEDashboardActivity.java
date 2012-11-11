@@ -85,7 +85,7 @@ public class HelpEEDashboardActivity extends ATemplateActivity implements DrawMa
 			mIdleTimer.dismiss();
 		}
 
-		if(mStateMachine.getState() == STATES.FINISHED) {
+		if(mStateMachine.getState() == STATES.FINISHED || mStateMachine.getState() == STATES.SHIELDED) {
 			ThreadPool.runTask(UserManager.getInstance().deleteUserChoice(getApplicationContext()));
 			finish();
 
@@ -95,7 +95,7 @@ public class HelpEEDashboardActivity extends ATemplateActivity implements DrawMa
 
 	@Override
 	public void onBackPressed() {
-		if(mStateMachine.getState() == STATES.FINISHED) {
+		if(mStateMachine.getState() == STATES.FINISHED || mStateMachine.getState() == STATES.SHIELDED) {
 			super.onBackPressed();
 		}
 	}
@@ -114,7 +114,7 @@ public class HelpEEDashboardActivity extends ATemplateActivity implements DrawMa
 
 								switch((STATES) mStateMachine.getState()) {
 									case PART_SHIELDED:
-										if(mIdleTimer != null) {
+										if(mIdleTimer == null) {
 											mIdleTimer = new ResetTimer();
 											mIdleTimer.execute(6000L);
 										}
@@ -183,45 +183,49 @@ public class HelpEEDashboardActivity extends ATemplateActivity implements DrawMa
 	}
 
 	public void toHelpIncomming() {
-		mTopCover.setImageResource(R.drawable.drawable_green);
-		mFadeIn.setTarget(mTopCover);
-		mFadeOut.setTarget(mTopCover);
-		mFadeOut.setStartDelay(100);
-		mFadeIn.addListener(new AnimatorListenerAdapter() {
-			@Override
-			public void onAnimationEnd(Animator animation) {
+		if(mStateMachine.getState() == STATES.LOCKED) {
+			mTopCover.setImageResource(R.drawable.drawable_green);
+			mFadeIn.setTarget(mTopCover);
+			mFadeOut.setTarget(mTopCover);
+			mFadeOut.setStartDelay(100);
+			mFadeIn.addListener(new AnimatorListenerAdapter() {
+				@Override
+				public void onAnimationEnd(Animator animation) {
 
-				mStateMachine.setState(STATES.HELP_INCOMMING);
+					mStateMachine.setState(STATES.HELP_INCOMMING);
 
-				mFadeOut.start();
-				super.onAnimationEnd(animation);
-			}
-		});
+					mFadeOut.start();
+					super.onAnimationEnd(animation);
+				}
+			});
 
-		long[] pattern = { 0, 25, 75, 25, 75, 25, 75, 25 };
-		mVibrator.vibrate(pattern, -1);
-		mFadeIn.start();
+			long[] pattern = { 0, 25, 75, 25, 75, 25, 75, 25 };
+			mVibrator.vibrate(pattern, -1);
+			mFadeIn.start();
+		}
 	}
 
 	public void toCallCenter() {
-		mTopCover.setImageResource(R.drawable.drawable_yellow);
-		mFadeIn.setTarget(mTopCover);
-		mFadeOut.setTarget(mTopCover);
-		mFadeOut.setStartDelay(100);
-		mFadeIn.addListener(new AnimatorListenerAdapter() {
-			@Override
-			public void onAnimationEnd(Animator animation) {
+		if(mStateMachine.getState() == STATES.LOCKED) {
+			mTopCover.setImageResource(R.drawable.drawable_yellow);
+			mFadeIn.setTarget(mTopCover);
+			mFadeOut.setTarget(mTopCover);
+			mFadeOut.setStartDelay(100);
+			mFadeIn.addListener(new AnimatorListenerAdapter() {
+				@Override
+				public void onAnimationEnd(Animator animation) {
 
-				mStateMachine.setState(STATES.CALLCENTER);
+					mStateMachine.setState(STATES.CALLCENTER);
 
-				mFadeOut.start();
-				super.onAnimationEnd(animation);
-			}
-		});
+					mFadeOut.start();
+					super.onAnimationEnd(animation);
+				}
+			});
 
-		long[] pattern = { 0, 25, 75, 25, 75, 25, 75, 25 };
-		mVibrator.vibrate(pattern, -1);
-		mFadeIn.start();
+			long[] pattern = { 0, 25, 75, 25, 75, 25, 75, 25 };
+			mVibrator.vibrate(pattern, -1);
+			mFadeIn.start();
+		}
 	}
 
 	@Override
@@ -261,6 +265,7 @@ public class HelpEEDashboardActivity extends ATemplateActivity implements DrawMa
 
 		synchronized public void dismiss() {
 			dismissed = true;
+			mIdleTimer = null;
 		}
 
 		@Override
