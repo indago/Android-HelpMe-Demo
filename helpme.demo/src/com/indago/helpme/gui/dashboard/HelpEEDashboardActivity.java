@@ -83,56 +83,53 @@ public class HelpEEDashboardActivity extends ATemplateActivity implements DrawMa
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if(v instanceof HelpEEButtonView) {
+					switch(event.getAction()) {
+						case MotionEvent.ACTION_DOWN:
+							if(mStateMachine.getState() != STATES.LOCKED && mStateMachine.getState() != STATES.FINISHED) {
 
-					if(mStateMachine.getState() != STATES.HELP_INCOMMING && mStateMachine.getState() != STATES.CALLCENTER_PRESSED) {
+								mStateMachine.nextState();
 
-						switch(event.getAction()) {
-							case MotionEvent.ACTION_DOWN:
-								if(mStateMachine.getState() != STATES.LOCKED) {
-
-									mStateMachine.nextState();
-
-									switch((STATES) mStateMachine.getState()) {
-										case PART_SHIELDED:
-											if(mIdleTimer != null) {
-												mIdleTimer = new ResetTimer();
-												mIdleTimer.execute(6000L);
-											}
-											break;
-										case PRESSED:
-											if(mIdleTimer != null) {
-												mIdleTimer.dismiss();
-											}
-											break;
-
-										default:
-											if(mIdleTimer != null) {
-												mIdleTimer.resetTime();
-											}
-											break;
-									}
-
-									mVibrator.vibrate(10);
-
-								} else {
-									/**
-									 * FOR TESTING PURPOSE
-									 */
-									//new SetStateTimer(10000L).execute(STATES.CALLCENTER);
+								switch((STATES) mStateMachine.getState()) {
+									case PART_SHIELDED:
+										if(mIdleTimer != null) {
+											mIdleTimer = new ResetTimer();
+											mIdleTimer.execute(6000L);
+										}
+										break;
+									case PRESSED:
+										if(mIdleTimer != null) {
+											mIdleTimer.dismiss();
+										}
+										break;
+									case HELP_INCOMMING:
+										mStateMachine.setState(STATES.FINISHED);
+										break;
+									case CALLCENTER_PRESSED:
+										mStateMachine.setState(STATES.FINISHED);
+										break;
+									default:
+										if(mIdleTimer != null) {
+											mIdleTimer.resetTime();
+										}
+										break;
 								}
 
-								break;
-							case MotionEvent.ACTION_UP:
-								if(mStateMachine.getState() == STATES.PRESSED) {
-									HistoryManager.getInstance().startNewTask();
-									ButtonStateChangeDelay mBRTimer = new ButtonStateChangeDelay();
-									mBRTimer.execute(STATES.LOCKED);
-								}
-								break;
-						}
+								mVibrator.vibrate(10);
 
+							}
+
+							break;
+						case MotionEvent.ACTION_UP:
+							if(mStateMachine.getState() == STATES.PRESSED) {
+								HistoryManager.getInstance().startNewTask();
+								ButtonStateChangeDelay mBRTimer = new ButtonStateChangeDelay();
+								mBRTimer.execute(STATES.LOCKED);
+							}
+							break;
 					}
+
 				}
+
 				return false;
 			}
 		});
@@ -159,9 +156,8 @@ public class HelpEEDashboardActivity extends ATemplateActivity implements DrawMa
 	@Override
 	public void onBackPressed() {
 		if(mStateMachine.getState() == STATES.HELP_INCOMMING || mStateMachine.getState() == STATES.FINISHED) {
-			mStateMachine.setState(STATES.DEFAULT);
 			ThreadPool.runTask(UserManager.getInstance().deleteUserChoice(getApplicationContext()));
-			super.onBackPressed();
+			finish();
 		}
 	}
 
