@@ -32,7 +32,7 @@
         <activity
             android:name=".gui.dashboard.HelpEEDashboardActivity"
             android:label="@string/title_activity_help_me_button"
-            android:launchMode="singleInstance"
+            android:noHistory="true"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -41,7 +41,7 @@
         <activity
             android:name=".gui.dashboard.HelpERDashboardActivity"
             android:label="@string/title_activity_help_me_button"
-            android:launchMode="singleInstance"
+            android:noHistory="true"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -57,7 +57,7 @@
                 android:value="com.indago.helpme.gui.HelpERControlcenterActivity" />
         </activity>
         <activity
-            android:name=".gui.HelpERControlcenterActivity"
+            android:name=".gui.dashboard.HelpERControlcenterActivity"
             android:label="@string/title_activity_help_er_controlcenter"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" >
