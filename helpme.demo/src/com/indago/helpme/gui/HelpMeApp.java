@@ -160,7 +160,7 @@ public class HelpMeApp extends ATemplateActivity implements OnItemClickListener,
 
 			@Override
 			public void run() {
-				startActivity(new Intent(getBaseContext(), com.indago.helpme.gui.dashboard.HelpERDashboardActivity.class));
+				startActivity(new Intent(getBaseContext(), com.indago.helpme.gui.dashboard.HelpERControlcenterActivity.class));
 			}
 		};
 
